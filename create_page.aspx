@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="user_page.aspx.cs" Inherits="user_page" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="create_page.aspx.cs" Inherits="create_page" %>
 
 <!DOCTYPE html>
 
@@ -6,7 +6,7 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>UserPage</title>
+	<title>Create!</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
   	<!-- Facebook and Twitter integration -->
@@ -47,91 +47,31 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+
 	</head>
 
 	<body>
 	<div class="gtco-loader"></div>
-	<div id="page">
-	<nav class="gtco-nav" role="navigation">
+	<div id="gtco-subscribe">
 		<div class="gtco-container">
-			<div class="row">
-				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">仓库中心<em>.</em></a></div>
-				</div>
-				<div class="col-xs-8 text-right menu-1">
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li class="active"><a href="about.html">About</a></li>
-						<li class="has-dropdown">
-							<a href="services.html">Services</a>
-							<ul class="dropdown">
-								<li><a href="#">Web Design</a></li>
-								<li><a href="#">eCommerce</a></li>
-								<li><a href="#">Branding</a></li>
-								<li><a href="#">API</a></li>
-							</ul>
-						</li>
-						<li class="has-dropdown">
-							<a href="#">Dropdown</a>
-							<ul class="dropdown">
-								<li><a href="#">HTML5</a></li>
-								<li><a href="#">CSS3</a></li>
-								<li><a href="#">Sass</a></li>
-								<li><a href="#">jQuery</a></li>
-							</ul>
-						</li>
-						<li><a href="portfolio.html">Portfolio</a></li>
-						<li><a href="contact.html">Contact</a></li>
-					</ul>
-				</div>
-			</div>
-			
-		</div>
-	</nav>
-
-	<header id="gtco-header" class="gtco-cover gtco-cover-xs" role="banner" style="background-image:url(images/img_bg_1.jpg);">
-		<div class="overlay"></div>
-		<div class="gtco-container">
-			<div class="row">
-				<div class="col-md-8 col-md-offset-2 text-center">
-					<div class="display-t">
-						<div class="display-tc">
-							<h1 class="animate-box" data-animate-effect="fadeInUp" id="username" runat="server">name</h1>
-							<h2 class="animate-box" data-animate-effect="fadeInUp" id="description" runat="server">desc</h2>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-
-	<div id="gtco-history" class="gtco-section border-bottom animate-box">
-		<div class="gtco-container">
-				
-			<div class="row">
+			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>代码仓库列表</h2>
-					<%--<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>--%>
-                    <div style="width:60%;margin-left: auto; margin-right: auto;">
-                        <input id="createButton" type="button" class="btn btn-default btn-block" value="Create a warehouse!" onclick="window.location.href='create_page.aspx'"/>
-                    </div>
+					<h2>create</h2>
+					<p>!!!!!!</p>
 				</div>
 			</div>
+			<div class="row animate-box">
+				<div class="col-md-12">
 
-			<div class="row row-pb-md">
-                <div style="width:60%; margin-left: auto; margin-right: auto;">
-                    <style type="text/css">
-                        .lib_border{
-                            border-style:solid;
-                            border-width:medium;
-                            border-color:aquamarine;
-                        }
-                    </style>
-                    <div class="lib_border">
-                        <p>项目名称：<a href="#">sssss</a></p>
-                        <p>创建时间：</p>
-                        <p>项目说明：</p>
+                    <div style="width: 50%; margin-left: auto; margin-right: auto;">
+                        <form id="form1" runat="server" method="get">
+                            <label for="name" class="sr-only">Name</label>
+                            <p><input type="text" runat="server" class="form-control" id="name" placeholder="name"></p>
+                            <p><input type="text" runat="server" class="form-control" id="desc" placeholder="desc"></p>
+                            <asp:Button ID="createButton" runat="server" Class="btn btn-default btn-block" Style="color: white" Text="create" OnClick="createButton_Click" />
+                        </form>
                     </div>
+
                 </div>
 			</div>
 		</div>
@@ -139,7 +79,7 @@
 
 	<footer id="gtco-footer" role="contentinfo">
 		<div class="gtco-container">
-			<div class="row row-pb-md">
+			<div class="row row-p	b-md">
 
 				<div class="col-md-4">
 					<div class="gtco-widget">
@@ -180,20 +120,11 @@
 						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
 						<small class="block">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> Demo Images: <a href="#" target="_blank">Unsplash</a></small>
 					</p>
-					<p class="pull-right">
-						<ul class="gtco-social-icons pull-right">
-							<li><a href="#"><i class="icon-twitter"></i></a></li>
-							<li><a href="#"><i class="icon-facebook"></i></a></li>
-							<li><a href="#"><i class="icon-linkedin"></i></a></li>
-							<li><a href="#"><i class="icon-dribbble"></i></a></li>
-						</ul>
-					</p>
 				</div>
 			</div>
 
 		</div>
 	</footer>
-	</div>
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>

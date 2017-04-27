@@ -129,3 +129,172 @@ public class UserDAL
         return true;
     }
 }
+
+public class WarehouseDAL
+{
+    private SqlDatabase sqlServerDB;
+
+    public WarehouseDAL()
+    {
+        DatabaseProviderFactory factory = new DatabaseProviderFactory();
+        sqlServerDB = factory.CreateDefault() as SqlDatabase;
+    }
+
+    public bool Insert(ref Warehouse w)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+
+        //todo:check user id
+
+        //todo:get last version id
+        reader = sqlServerDB.ExecuteReader(CommandType.Text, "select max(warehouse_id) from warehouse_table");
+        if (reader.Read())
+        {
+            if (reader[0] is System.DBNull)
+            {
+                return false;
+            }
+            else
+            {
+                w.warehouse_id = reader.GetInt32(0) + 1;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+        //insert
+        cmd = sqlServerDB.GetSqlStringCommand("insert into warehouse_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, w.warehouse_id);
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, w.user_id);
+        sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, w.organization_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, w.warehouse_type);
+        w.create_time = DateTime.Now.ToString();
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.String, w.create_time);
+        sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, w.warehouse_description);
+        sqlServerDB.AddInParameter(cmd, "@a6", DbType.Int32, w.master_version_id);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, w.warehouse_name);
+
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool SelectByID()
+    {
+        return true;
+    }
+}
+
+public class VersionDAL
+{
+    private SqlDatabase sqlServerDB;
+
+    public VersionDAL()
+    {
+        DatabaseProviderFactory factory = new DatabaseProviderFactory();
+        sqlServerDB = factory.CreateDefault() as SqlDatabase;
+    }
+
+    public bool Insert(ref Version v)
+    {
+        IDataReader reader;
+        DbCommand cmd;
+
+        //get new id
+        reader = sqlServerDB.ExecuteReader(CommandType.Text, "select max(version_id) from version_table");
+        if (reader.Read())
+        {
+            if (reader[0] is System.DBNull)
+            {
+                return false;
+            }
+            else
+            {
+                v.version_id = reader.GetInt32(0) + 1;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+        //insert
+        cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, v.version_id);
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, v.warehouse_id);
+        sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, v.user_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, v.prev_id);
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.Int32, v.next_id);
+        v.timestamp = DateTime.Now.ToString();
+        sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, v.timestamp);
+        sqlServerDB.AddInParameter(cmd, "@a6", DbType.String, v.version_name);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, v.description);
+
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+}
+
+public class BranchDAL
+{
+    private SqlDatabase sqlServerDB;
+
+    public BranchDAL()
+    {
+        DatabaseProviderFactory factory = new DatabaseProviderFactory();
+        sqlServerDB = factory.CreateDefault() as SqlDatabase;
+    }
+
+    public bool Insert(ref Branch b)
+    {
+        IDataReader reader;
+        DbCommand cmd;
+
+        //get new id
+        reader = sqlServerDB.ExecuteReader(CommandType.Text, "select max(branch_id) from branch_table");
+        if (reader.Read())
+        {
+            if (reader[0] is System.DBNull)
+            {
+                return false;
+            }
+            else
+            {
+                b.branch_id = reader.GetInt32(0) + 1;
+            }
+        }
+        else
+        {
+            return false;
+        }
+
+        //insert
+        cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, b.branch_id);
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, b.warehouse_id);
+        sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, b.user_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, b.start_id);
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.Int32, b.end_id);
+        b.timestamp = DateTime.Now.ToString();
+        sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, b.timestamp);
+        sqlServerDB.AddInParameter(cmd, "@a6", DbType.String, b.branch_name);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, b.description);
+
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+}
