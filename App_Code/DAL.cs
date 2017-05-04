@@ -140,6 +140,31 @@ public class WarehouseDAL
         sqlServerDB = factory.CreateDefault() as SqlDatabase;
     }
 
+    public bool SelectedByID(ref Warehouse w)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+        cmd = sqlServerDB.GetSqlStringCommand("select * from warehouse_table where warehouse_id=@a1");
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, w.warehouse_id);
+        reader = sqlServerDB.ExecuteReader(cmd);
+        if (reader.Read())
+        {
+            w.warehouse_id = reader.GetInt32(0);
+            w.user_id = reader.GetInt32(1);
+            w.organization_id = w.warehouse_id = reader.GetInt32(2);
+            w.warehouse_type = reader.GetInt32(3);
+            w.create_time = reader.GetString(4);
+            w.warehouse_description = reader.GetString(5);
+            w.master_version_id = reader.GetInt32(6);
+            w.warehouse_name = reader.GetString(7);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public bool Insert(ref Warehouse w)
     {
         DbCommand cmd;
@@ -185,8 +210,9 @@ public class WarehouseDAL
         return true;
     }
 
-    public bool SelectByID()
+    public bool Delete(ref Warehouse w)
     {
+
         return true;
     }
 }
