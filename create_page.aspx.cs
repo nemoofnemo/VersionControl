@@ -27,23 +27,45 @@ public partial class create_page : System.Web.UI.Page
 
     protected void createButton_Click(object sender, EventArgs e)
     {
-        if(Session["user"] != null)
+        if(Session["user"] == null)
         {
-            User u = Session["user"] as User;
-            Warehouse w = new Warehouse();
-            WarehouseDAL wd = new WarehouseDAL();
-            w.user_id = u.user_id;
-            w.warehouse_name = name.Value;
-            w.warehouse_description = desc.Value;
-            if(wd.Insert(ref w))
-            {
-
-            }
-            else
-            {
-                Response.Write("<script>alert('error: warehouse insert');</script>");
-                return;
-            }
+            Response.Write("<script>alert('please login.');</script>");
         }
+
+        //create warehouse
+        User u = Session["user"] as User;
+        Warehouse w = new Warehouse();
+        WarehouseDAL wd = new WarehouseDAL();
+        w.user_id = u.user_id;
+        w.warehouse_name = name.Value;
+        w.warehouse_description = desc.Value;
+        if (wd.Insert(ref w))
+        {
+
+        }
+        else
+        {
+            Response.Write("<script>alert('error: warehouse insert');</script>");
+            return;
+        }
+
+        //create first version
+        Version v = new Version();
+        VersionDAL vd = new VersionDAL();
+        v.user_id = u.user_id;
+        v.warehouse_id = w.warehouse_id;
+        v.version_name = "master";
+        v.description = "master";
+        if (vd.Insert(ref v))
+        {
+            
+        }
+        else
+        {
+            //delete warehouse
+            Response.Write("<script>alert('error: warehouse insert');</script>");
+            return;
+        }
+
     }
 }

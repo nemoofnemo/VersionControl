@@ -212,7 +212,13 @@ public class WarehouseDAL
 
     public bool Delete(ref Warehouse w)
     {
-
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("delete from warehouse_table where warehouse_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, w.warehouse_id);
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
         return true;
     }
 }
