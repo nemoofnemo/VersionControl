@@ -210,6 +210,27 @@ public class WarehouseDAL
         return true;
     }
 
+    public bool Update(ref Warehouse w)
+    {
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("update warehouse_table set warehouse_id=@a0,user_id=@a1,organization_id=@a2,warehouse_type=@a3,create_time=@a4,warehouse_description=@a5,master_version_id=@a6,warehouse_name=@a7 where warehouse_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, w.warehouse_id);
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, w.user_id);
+        sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, w.organization_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, w.warehouse_type);
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.String, w.create_time);
+        sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, w.warehouse_description);
+        sqlServerDB.AddInParameter(cmd, "@a6", DbType.Int32, w.master_version_id);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, w.warehouse_name);
+
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     public bool Delete(ref Warehouse w)
     {
         DbCommand cmd;
@@ -221,6 +242,8 @@ public class WarehouseDAL
         }
         return true;
     }
+
+    
 }
 
 public class VersionDAL
@@ -275,6 +298,18 @@ public class VersionDAL
 
         return true;
     }
+
+    public bool Delete(ref Version v)
+    {
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("delete from version_table where version_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, v.version_id);
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+        return true;
+    }
 }
 
 public class BranchDAL
@@ -311,7 +346,7 @@ public class BranchDAL
         }
 
         //insert
-        cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
+        cmd = sqlServerDB.GetSqlStringCommand("insert into branch_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
         sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, b.branch_id);
         sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, b.warehouse_id);
         sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, b.user_id);

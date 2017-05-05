@@ -127,10 +127,12 @@
                             border-color:aquamarine;
                         }
                     </style>
-                    <div class="lib_border">
-                        <p>项目名称：<a href="#">sssss</a></p>
-                        <p>创建时间：</p>
-                        <p>项目说明：</p>
+                    <div id="lib_list" runat="server">
+                        <div class="lib_border">
+                            <p>项目名称：<a href="#">sssss</a></p>
+                            <p>创建时间：</p>
+                            <p>项目说明：</p>
+                        </div>
                     </div>
                 </div>
 			</div>

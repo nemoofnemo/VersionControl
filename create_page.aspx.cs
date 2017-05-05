@@ -16,7 +16,8 @@ public partial class create_page : System.Web.UI.Page
         Session["user"] = u;
 
         if(Session["user"] == null){
-
+            Response.Write("<script>alert('please login.');window.location.href='login_page.aspx';</script>");
+            return;
         }
         else
         {
@@ -29,7 +30,14 @@ public partial class create_page : System.Web.UI.Page
     {
         if(Session["user"] == null)
         {
-            Response.Write("<script>alert('please login.');</script>");
+            Response.Write("<script>alert('please login.');window.location.href='login_page.aspx';</script>");
+            return;
+        }
+
+        if(name.Value.Length == 0 || desc.Value.Length == 0)
+        {
+            Response.Write("<script>alert('emoty data');</script>");
+            return;
         }
 
         //create warehouse
@@ -58,14 +66,51 @@ public partial class create_page : System.Web.UI.Page
         v.description = "master";
         if (vd.Insert(ref v))
         {
-            
+            w.master_version_id = v.version_id;
         }
         else
         {
             //delete warehouse
-            Response.Write("<script>alert('error: warehouse insert');</script>");
+            wd.Delete(ref w);
+            Response.Write("<script>alert('error: version insert');</script>");
             return;
         }
 
+        if (wd.Update(ref w))
+        {
+
+        }
+        else
+        {
+            //delete warehouse and version
+            wd.Delete(ref w);
+            vd.Delete(ref v);
+            Response.Write("<script>alert('error: warehouse update');</script>");
+            return;
+        }
+
+        //insert branch
+        Branch b = new Branch();
+        BranchDAL bd = new BranchDAL();
+        b.warehouse_id = w.warehouse_id;
+        b.user_id = u.user_id;
+        b.start_id = v.version_id;
+        b.end_id = v.version_id;
+        b.branch_name = "master";
+        b.description = "master";
+        if (bd.Insert(ref b))
+        {
+
+        }
+        else
+        {
+            wd.Delete(ref w);
+            vd.Delete(ref v);
+            Response.Write("<script>alert('error: branch insert');</script>");
+            return;
+        }
+
+        //create success
+        Response.Write("<script>alert('create success.');window.location.href='user_page.aspx';</script>");
     }
 }

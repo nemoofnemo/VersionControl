@@ -47,5 +47,7 @@ public partial class user_page : System.Web.UI.Page
         {
             //no uid
         }
+
+        lib_list.InnerHtml = "<div class=\"lib_border\"><p>dddddd</p><div>";
     }
 }
