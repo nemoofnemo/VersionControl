@@ -14,6 +14,7 @@
         <div>
             <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
         </div>
+        <a href="APITest.aspx">ssss</a>
     </form>
 </body>
 </html>

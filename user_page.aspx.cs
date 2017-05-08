@@ -26,7 +26,7 @@ public partial class user_page : System.Web.UI.Page
             }
 
             //debug
-            u.user_id = 0;
+            //u.user_id = 0;
 
             if (userDAL.SelectByID(ref u))
             {
@@ -39,12 +39,13 @@ public partial class user_page : System.Web.UI.Page
             }
 
             //debug
-            Session["user"] = u;
+            //Session["user"] = u;
 
             //print lib list
             if (printLibList(u.user_id) == false)
             {
                 //fail
+                Response.Write("<script>alert('printlist error');</script>");
             }
         }
         else
@@ -68,7 +69,7 @@ public partial class user_page : System.Web.UI.Page
         {
             str += "<div class=\"lib_border\"><p>项目名称：<a href=\"warehouse_page.aspx?wid=" +w.warehouse_id.ToString() +"&mid=" + w.master_version_id.ToString() +"\">" + w.warehouse_name + "</a></p>";
             str += "<p>创建时间：" + w.create_time +"</p>";
-            str += "<p>项目说明：" + w.warehouse_description +"</p></div>";
+            str += "<p>项目说明：" + w.warehouse_description +"</p></div></br>";
         }
         lib_list.InnerHtml = str;
         return true;
