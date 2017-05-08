@@ -9,11 +9,12 @@ public partial class create_page : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        UserDAL userDAL = new UserDAL();
-        User u = new User();
-        u.user_id = 0;
-        userDAL.SelectByID(ref u);
-        Session["user"] = u;
+        //debug
+        //UserDAL userDAL = new UserDAL();
+        //User u = new User();
+        //u.user_id = 0;
+        //userDAL.SelectByID(ref u);
+        //Session["user"] = u;
 
         if(Session["user"] == null){
             Response.Write("<script>alert('please login.');window.location.href='login_page.aspx';</script>");
@@ -111,6 +112,6 @@ public partial class create_page : System.Web.UI.Page
         }
 
         //create success
-        Response.Write("<script>alert('create success.');window.location.href='user_page.aspx';</script>");
+        Response.Write("<script>alert('create success.');window.location.href='user_page.aspx'?uid="+u.user_id.ToString()+";</script>");
     }
 }

@@ -243,6 +243,32 @@ public class WarehouseDAL
         return true;
     }
 
+    public bool SelectByUserID(int uid, ref List<Warehouse> l)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+        //todo:check user id
+
+        cmd = sqlServerDB.GetSqlStringCommand("select * from warehouse_table where user_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, uid);
+        reader = sqlServerDB.ExecuteReader(cmd);
+
+        while (reader.Read())
+        {
+            Warehouse w = new Warehouse();
+            w.warehouse_id = reader.GetInt32(0);
+            w.user_id = reader.GetInt32(1);
+            w.organization_id = reader.GetInt32(2);
+            w.warehouse_type = reader.GetInt32(3);
+            w.create_time = reader.GetString(4);
+            w.warehouse_description = reader.GetString(5);
+            w.master_version_id = reader.GetInt32(6);
+            w.warehouse_name = reader.GetString(7);
+            l.Add(w);
+        }
+
+        return true;
+    }
     
 }
 

@@ -56,7 +56,7 @@
 		<div class="gtco-container">
 			<div class="row">
 				<div class="col-sm-4 col-xs-12">
-					<div id="gtco-logo"><a href="index.html">仓库中心<em>.</em></a></div>
+					<div id="gtco-logo"><a href="index.html">用户中心<em>.</em></a></div>
 				</div>
 				<div class="col-xs-8 text-right menu-1">
 					<ul>
@@ -111,7 +111,6 @@
 			<div class="row">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
 					<h2>代码仓库列表</h2>
-					<%--<p>Dignissimos asperiores vitae velit veniam totam fuga molestias accusamus alias autem provident. Odit ab aliquam dolor eius.</p>--%>
                     <div style="width:60%;margin-left: auto; margin-right: auto;">
                         <input id="createButton" type="button" class="btn btn-default btn-block" value="Create a warehouse!" onclick="window.location.href='create_page.aspx'"/>
                     </div>
@@ -124,14 +123,14 @@
                         .lib_border{
                             border-style:solid;
                             border-width:medium;
-                            border-color:aquamarine;
+                            border-color:silver;
                         }
                     </style>
                     <div id="lib_list" runat="server">
                         <div class="lib_border">
-                            <p>项目名称：<a href="#">sssss</a></p>
-                            <p>创建时间：</p>
-                            <p>项目说明：</p>
+                            <p>项目名称：<a href="#">null</a></p>
+                            <p>创建时间：null</p>
+                            <p>项目说明：null</p>
                         </div>
                     </div>
                 </div>

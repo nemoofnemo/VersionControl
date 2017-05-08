@@ -41,13 +41,36 @@ public partial class user_page : System.Web.UI.Page
             //debug
             Session["user"] = u;
 
-
+            //print lib list
+            if (printLibList(u.user_id) == false)
+            {
+                //fail
+            }
         }
         else
         {
             //no uid
+            Response.Write("<script>alert('invalid uid');</script>");
         }
 
-        lib_list.InnerHtml = "<div class=\"lib_border\"><p>dddddd</p><div>";
+    }
+
+    private bool printLibList(int uid)
+    {
+        List<Warehouse> list = new List<Warehouse>();
+        WarehouseDAL wd = new WarehouseDAL();
+        if(wd.SelectByUserID(uid, ref list) == false)
+        {
+            return false;
+        }
+        string str = "";
+        foreach(Warehouse w in list)
+        {
+            str += "<div class=\"lib_border\"><p>项目名称：<a href=\"warehouse_page.aspx?wid=" +w.warehouse_id.ToString() +"&mid=" + w.master_version_id.ToString() +"\">" + w.warehouse_name + "</a></p>";
+            str += "<p>创建时间：" + w.create_time +"</p>";
+            str += "<p>项目说明：" + w.warehouse_description +"</p></div>";
+        }
+        lib_list.InnerHtml = str;
+        return true;
     }
 }
