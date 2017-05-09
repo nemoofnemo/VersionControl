@@ -12,9 +12,10 @@
     <div id="div1" runat="server"></div>
     <form id="form1" runat="server">
         <div>
+            <input type="file" id="file1" runat="server" />
+            <p />
             <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
         </div>
-        <a href="APITest.aspx">ssss</a>
     </form>
 </body>
 </html>

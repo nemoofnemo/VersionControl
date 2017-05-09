@@ -14,6 +14,6 @@ public partial class warehouse_page : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        selected_node.InnerHtml = hidValue1.Value;
+        
     }
 }

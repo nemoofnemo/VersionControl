@@ -47,6 +47,22 @@
     <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+    <style>
+        .nemobutton {
+            background-color: rgba(29, 43, 83, 0.89); /* Green */
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+    </style>
+
     <script src="js/sigma.core.js"></script>
     <script src="js/conrad.js"></script>
     <script src="js/utils/sigma.utils.js"></script>
@@ -151,17 +167,16 @@
                 </div>
             </div>
         </header>
+        <div style="clear: both; height: 0; font-size: 1px; line-height: 0px;"></div>
 
         <form id="form1" runat="server">
             <%-- sigma graph --%>
-            <div style="background-color: #ccc"><a style="background-color: #ccc;">Graph:</a></div>
-            <%--<div id="selected_node" style="visibility: hidden; display: none" runat="server"></div>--%>
-            <div id="selected_node" runat="server">sssss</div>
+            <div style="background-color:#ccc"><a style="background-color: #ccc;">Graph:</a></div>
             <asp:HiddenField ID="hidValue1" runat="server"/>
             <div id="sigma_container">
                 <style>
                     #graph-container {
-                        top: 20%;
+                        top: 5px;
                         bottom: 5px;
                         left: 5px;
                         right: 5px;
@@ -178,9 +193,8 @@
                         background: #ccc;
                     }
                 </style>
-                <div>Scroll down to see the graph</div>
-                <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click" />
                 <div id="graph-container"></div>
+                <div style="clear: both; height: 0; font-size: 1px; line-height: 0px;"></div>
             </div>
             <script>
                 var i,
@@ -244,6 +258,25 @@
                 });
             </script>
 
+            <div style="border-style: solid; border-width: medium; border-color: #ccc;">
+                <a style="color: #000000">当前分支：</a><a style="color: #000000">当前版本:</a>
+                <br />
+                <a style="color: #000000">当前版本描述：</a>
+                <br />
+                <input id="pushNew" class="nemobutton" type="button" value="推送新版本" />
+                <input id="pushNew" class="nemobutton" type="button" value="推送新版本" />
+                <%-- check in/out --%>
+                <br />
+
+                <a style="color: #000000">选中分支：</a><a style="color: #000000">选中版本:</a>
+                <br />
+                <input id="jumoVersion" class="nemobutton" type="button" value="查看选中版本" />
+                <%-- jump to create page --%>
+                <input id="createBranch" class="nemobutton" type="button" value="创建分支" />                
+                <input id="deleteBranch" class="nemobutton" type="button" value="删除分支" />
+                <input id="redoVersion" class="nemobutton" type="button" value="回滚至选中版本" />
+
+            </div>
 
             <%-- file list and file content --%>
             <div style="border-style: solid; border-width: medium; border-color: #ccc">
@@ -257,7 +290,7 @@
             <div style="border-style: solid; border-width: medium; border-color: #ccc">
                 <div id="file_list" style="float: left; width: 30%" runat="server">
                     <asp:ListBox ID="fileListBox" runat="server" Width="100%" Height="500px">
-                        <asp:ListItem Value="1" Text="1"><img src="images/file.png"/></asp:ListItem>
+                        <asp:ListItem>ssss</asp:ListItem>
                         <asp:ListItem>222222222222222222222222222222222222222222222222</asp:ListItem>
                         <asp:ListItem>333</asp:ListItem>
                         <asp:ListItem>44</asp:ListItem>
