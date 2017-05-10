@@ -61,6 +61,12 @@
             cursor: pointer;
             border-radius: 8px;
         }
+
+        .nemoborder{
+            border-style: solid; 
+            border-width: medium; 
+            border-color: #ccc;
+        }
     </style>
 
     <script src="js/sigma.core.js"></script>
@@ -159,15 +165,14 @@
                     <div class="col-md-8 col-md-offset-2 text-center">
                         <div class="display-t">
                             <div class="display-tc">
-                                <h1 class="animate-box" data-animate-effect="fadeInUp">About Us</h1>
-                                <h2 class="animate-box" data-animate-effect="fadeInUp">Free HTML5 Bootstrap Templates Made <em>by</em> More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></h2>
+                                <h1 id="headName" class="animate-box" data-animate-effect="fadeInUp" runat="server">warehouse name</h1>
+                                <h2 class="headDesc" data-animate-effect="fadeInUp" runat="server">wrehouse desc</h2>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-        <div style="clear: both; height: 0; font-size: 1px; line-height: 0px;"></div>
 
         <form id="form1" runat="server">
             <%-- sigma graph --%>
@@ -263,17 +268,16 @@
                 <br />
                 <a style="color: #000000">当前版本描述：</a>
                 <br />
-                <input id="pushNew" class="nemobutton" type="button" value="推送新版本" />
-                <input id="pushNew" class="nemobutton" type="button" value="推送新版本" />
-                <%-- check in/out --%>
+                <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" />
+                <input id="createBranch" class="nemobutton" type="button" value="创建分支" />                
+                <input id="deleteBranch" class="nemobutton" type="button" value="删除分支" />
                 <br />
 
                 <a style="color: #000000">选中分支：</a><a style="color: #000000">选中版本:</a>
                 <br />
                 <input id="jumoVersion" class="nemobutton" type="button" value="查看选中版本" />
                 <%-- jump to create page --%>
-                <input id="createBranch" class="nemobutton" type="button" value="创建分支" />                
-                <input id="deleteBranch" class="nemobutton" type="button" value="删除分支" />
+                
                 <input id="redoVersion" class="nemobutton" type="button" value="回滚至选中版本" />
 
             </div>
@@ -283,23 +287,24 @@
                 <asp:ImageButton ID="backwardButton" runat="server" ImageUrl="~/images/backward.png" Height="32px" Width="32px" />
                 <asp:ImageButton ID="forwardButton" runat="server" ImageUrl="~/images/forward.png" Height="32px" Width="32px" />
                 <asp:ImageButton ID="rootButton" runat="server" ImageUrl="~/images/root.png" Height="32px" Width="32px" />
+                <asp:ImageButton ID="createFileButton" runat="server" ImageUrl="~/images/file.png" Height="32px" Width="32px" />
+                <asp:ImageButton ID="createFolderButton" runat="server" ImageUrl="~/images/folder.png" Height="32px" Width="32px" />
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="  Path:" Font-Size="34px"></asp:Label>
                 <asp:Label ID="pathLabel" runat="server" Text="/" Font-Size="34px"></asp:Label>
             </div>
+            
+            <%-- list --%>
             <div style="border-style: solid; border-width: medium; border-color: #ccc">
                 <div id="file_list" style="float: left; width: 30%" runat="server">
-                    <asp:ListBox ID="fileListBox" runat="server" Width="100%" Height="500px">
-                        <asp:ListItem>ssss</asp:ListItem>
-                        <asp:ListItem>222222222222222222222222222222222222222222222222</asp:ListItem>
-                        <asp:ListItem>333</asp:ListItem>
-                        <asp:ListItem>44</asp:ListItem>
-                        <asp:ListItem>55</asp:ListItem>
-                        <asp:ListItem>55</asp:ListItem>
-                    </asp:ListBox>
+                    <p>ssss</p>
+                    <p>ssss</p>
+                    <p>ssss</p>
+                    <p>ssss</p>
+                    <p>ssss</p>
                 </div>
-
-                <div id="file_content" style="float: right; width: 70%" runat="server">
+                <div style="float: left; width:2%;border-style: solid; border-width: medium; border-color: #ccc;height:inherit"></div>
+                <div id="file_content" style="float: right; width: 70%;" runat="server">
                     <dl>
                         <dt>Coffee</dt>
                         <dd>Black hot drinkddddddddddddddddddddddddddddddddddddddddddd</dd>

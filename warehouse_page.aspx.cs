@@ -9,7 +9,7 @@ public partial class warehouse_page : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        fileListBox.Items.Add(new ListItem("asd", "sd"));
+        
     }
 
     protected void Button1_Click(object sender, EventArgs e)
