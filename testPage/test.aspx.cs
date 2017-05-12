@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.IO;
 
 public partial class testPage_test : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        Response.Write("111\r\n2222");
-
+        Response.Write(Server.MapPath("~/"));
     }
 
     protected void Button1_Click(object sender, EventArgs e)

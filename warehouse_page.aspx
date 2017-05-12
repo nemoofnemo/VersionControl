@@ -164,7 +164,7 @@
                         <div class="display-t">
                             <div class="display-tc">
                                 <h1 id="headName" class="animate-box" data-animate-effect="fadeInUp" runat="server">warehouse name</h1>
-                                <h2 class="headDesc" data-animate-effect="fadeInUp" runat="server">wrehouse desc</h2>
+                                <h2 id="headDesc" data-animate-effect="fadeInUp" runat="server">wrehouse desc</h2>
                             </div>
                         </div>
                     </div>
@@ -262,11 +262,17 @@
                     });
                 </script>
             </div>
-
+            <style>
+                .nemotext{
+                    color: #000000
+                }
+            </style>
             <div style="border-style: solid; border-width: medium; border-color: #ccc;">
-                <a style="color: #000000">当前分支：</a><a style="color: #000000">当前版本:</a><a style="color: #000000">创建时间：</a>
+                <a id="curBran" class="nemotext" runat="server">当前分支：</a>
+                <a id="curVer" class="nemotext" runat="server">当前版本：</a>
+                <a id="curTime" class="nemotext" runat="server">修改时间：</a>
                 <br />
-                <a style="color: #000000">当前版本描述：</a>
+                <a id="curDesc" class="nemotext" runat="server">当前版本描述：</a>
                 <br />
                 <asp:Button ID="copyButton" CssClass="nemobutton" Text="签出该版本" runat="server" />
                 <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" />

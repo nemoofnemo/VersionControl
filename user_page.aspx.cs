@@ -64,10 +64,11 @@ public partial class user_page : System.Web.UI.Page
         {
             return false;
         }
+        
         string str = "";
         foreach(Warehouse w in list)
         {
-            str += "<div class=\"lib_border\"><p>项目名称：<a href=\"warehouse_page.aspx?wid=" +w.warehouse_id.ToString() +"&mid=" + w.master_version_id.ToString() +"\">" + w.warehouse_name + "</a></p>";
+            str += "<div class=\"lib_border\"><p>项目名称：<a href=\"warehouse_page.aspx?wid=" +w.warehouse_id.ToString() +"&vid=" + w.master_version_id.ToString() + "\">" + w.warehouse_name + "</a></p>";
             str += "<p>创建时间：" + w.create_time +"</p>";
             str += "<p>项目说明：" + w.warehouse_description +"</p></div></br>";
         }

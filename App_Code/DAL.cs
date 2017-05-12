@@ -213,7 +213,7 @@ public class WarehouseDAL
     public bool Update(ref Warehouse w)
     {
         DbCommand cmd;
-        cmd = sqlServerDB.GetSqlStringCommand("update warehouse_table set warehouse_id=@a0,user_id=@a1,organization_id=@a2,warehouse_type=@a3,create_time=@a4,warehouse_description=@a5,master_version_id=@a6,warehouse_name=@a7 where warehouse_id=@a0");
+        cmd = sqlServerDB.GetSqlStringCommand("update warehouse_table set user_id=@a1,organization_id=@a2,warehouse_type=@a3,create_time=@a4,warehouse_description=@a5,master_version_id=@a6,warehouse_name=@a7 where warehouse_id=@a0");
         sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, w.warehouse_id);
         sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, w.user_id);
         sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, w.organization_id);
@@ -306,7 +306,7 @@ public class VersionDAL
         }
 
         //insert
-        cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
+        cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8)");
         sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, v.version_id);
         sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, v.warehouse_id);
         sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, v.user_id);
@@ -316,6 +316,7 @@ public class VersionDAL
         sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, v.timestamp);
         sqlServerDB.AddInParameter(cmd, "@a6", DbType.String, v.version_name);
         sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, v.description);
+        sqlServerDB.AddInParameter(cmd, "@a8", DbType.Int32, v.branch_id);
 
         if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
         {
@@ -323,6 +324,53 @@ public class VersionDAL
         }
 
         return true;
+    }
+
+    public bool Update(ref Version v)
+    {
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("update version_table set prev_id=@a3,next_id=@a4,timestamp=@a5,version_name=@a6,description=@a7,branch_id=@a8 where version_id=@a0");
+
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, v.version_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, v.prev_id);
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.Int32, v.next_id);
+        v.timestamp = DateTime.Now.ToString();
+        sqlServerDB.AddInParameter(cmd, "@a5", DbType.String, v.timestamp);
+        sqlServerDB.AddInParameter(cmd, "@a6", DbType.String, v.version_name);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, v.description);
+        sqlServerDB.AddInParameter(cmd, "@a8", DbType.Int32, v.branch_id);
+
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool SelectByID(ref Version v)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+        cmd = sqlServerDB.GetSqlStringCommand("select * from version_table where version_id=@a1");
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, v.version_id);
+        reader = sqlServerDB.ExecuteReader(cmd);
+        if (reader.Read())
+        {
+            v.warehouse_id = reader.GetInt32(1);
+            v.user_id = reader.GetInt32(2);
+            v.prev_id = reader.GetInt32(3);
+            v.next_id = reader.GetInt32(4);
+            v.timestamp = reader.GetString(5);
+            v.version_name = reader.GetString(6);
+            v.description = reader.GetString(7);
+            v.branch_id = reader.GetInt32(8);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public bool Delete(ref Version v)

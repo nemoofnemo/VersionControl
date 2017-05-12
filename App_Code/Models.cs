@@ -49,6 +49,7 @@ public class Version
     public string timestamp;
     public string version_name;
     public string description;
+    public int branch_id;
 }
 
 public class Branch
