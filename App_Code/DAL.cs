@@ -442,7 +442,7 @@ public class BranchDAL
     public bool Update(ref Branch b)
     {
         DbCommand cmd;
-        cmd = sqlServerDB.GetSqlStringCommand("update branch_table set branch_id=@a1,user_id=@a2,start_id=@a3,end_id=@a4,description=@a7 where branch_id=@a0");
+        cmd = sqlServerDB.GetSqlStringCommand("update branch_table set warehouse_id=@a1,user_id=@a2,start_id=@a3,end_id=@a4,description=@a7 where branch_id=@a0");
         sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, b.branch_id);
         sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, b.warehouse_id);
         sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, b.user_id);
