@@ -390,4 +390,85 @@ public class BranchDAL
 
         return true;
     }
+
+    public bool Update(ref Branch b)
+    {
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("update branch_table set branch_id=@a1,user_id=@a2,start_id=@a3,end_id=@a4,description=@a7 where branch_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, b.branch_id);
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, b.warehouse_id);
+        sqlServerDB.AddInParameter(cmd, "@a2", DbType.Int32, b.user_id);
+        sqlServerDB.AddInParameter(cmd, "@a3", DbType.Int32, b.start_id);
+        sqlServerDB.AddInParameter(cmd, "@a4", DbType.Int32, b.end_id);
+        sqlServerDB.AddInParameter(cmd, "@a7", DbType.String, b.description);
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public bool SelectByID(ref Branch b)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+        cmd = sqlServerDB.GetSqlStringCommand("select * from branch_table where branch_id=@a1");
+        sqlServerDB.AddInParameter(cmd, "@a1", DbType.Int32, b.branch_id);
+        reader = sqlServerDB.ExecuteReader(cmd);
+        if (reader.Read())
+        {
+            b.warehouse_id = reader.GetInt32(1);
+            b.user_id = reader.GetInt32(2);
+            b.start_id = reader.GetInt32(3);
+            b.end_id = reader.GetInt32(4);
+            b.timestamp = reader.GetString(5);
+            b.branch_name = reader.GetString(6);
+            b.description = reader.GetString(7);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool SelectByWarehouseID(int id, ref List<Branch> l)
+    {
+        DbCommand cmd;
+        IDataReader reader;
+        //todo:check user id
+
+        cmd = sqlServerDB.GetSqlStringCommand("select * from branch_table where warehouse_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, id);
+        reader = sqlServerDB.ExecuteReader(cmd);
+
+        while (reader.Read())
+        {
+            Branch b = new Branch();
+            b.branch_id = reader.GetInt32(0);
+            b.warehouse_id = reader.GetInt32(1);
+            b.user_id = reader.GetInt32(2);
+            b.start_id = reader.GetInt32(3);
+            b.end_id = reader.GetInt32(4);
+            b.timestamp = reader.GetString(5);
+            b.branch_name = reader.GetString(6);
+            b.description = reader.GetString(7);
+            l.Add(b);
+        }
+
+        return true;
+    }
+
+    public bool Delete(int id)
+    {
+        DbCommand cmd;
+        cmd = sqlServerDB.GetSqlStringCommand("delete from branch_table where branch_id=@a0");
+        sqlServerDB.AddInParameter(cmd, "@a0", DbType.Int32, id);
+        if (sqlServerDB.ExecuteNonQuery(cmd) != 1)
+        {
+            return false;
+        }
+        return true;
+    }
 }

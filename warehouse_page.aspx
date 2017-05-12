@@ -20,8 +20,6 @@
     <meta name="twitter:url" content="" />
     <meta name="twitter:card" content="" />
 
-    <!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
-
     <!-- Animate.css -->
     <link rel="stylesheet" href="css/animate.css">
     <!-- Icomoon Icon Fonts-->
@@ -176,8 +174,8 @@
 
         <form id="form1" runat="server">
             <%-- sigma graph --%>
-            <div style="background-color:#ccc"><a style="background-color: #ccc;">Graph:</a></div>
-            <asp:HiddenField ID="hidValue1" runat="server"/>
+            <div style="background-color: #ccc"><a style="background-color: #ccc;">Graph:</a></div>
+            <asp:HiddenField ID="hidValue1" runat="server" />
             <div id="sigma_container">
                 <style>
                     #graph-container {
@@ -201,76 +199,79 @@
                 <div id="graph-container"></div>
                 <div style="clear: both; height: 0; font-size: 1px; line-height: 0px;"></div>
             </div>
-            <script>
-                var i,
-                    s,
-                    N = 20,
-                    E = 200,
-                    g = {
-                        nodes: [],
-                        edges: []
-                    };
+            <div id="graph_script" runat="server">
+                <script>
+                    var i,
+                        s,
+                        N = 20,
+                        E = 200,
+                        g = {
+                            nodes: [],
+                            edges: []
+                        };
 
-                g.nodes.push({
-                    id: 'a',
-                    label: 'hello',
-                    x: 0,
-                    y: 0,
-                    size: 10,
-                    color: '#666'
-                });
+                    g.nodes.push({
+                        id: 'a',
+                        label: 'hello',
+                        x: 0,
+                        y: 0,
+                        size: 10,
+                        color: '#666'
+                    });
 
-                g.nodes.push({
-                    id: 'b',
-                    label: 'world',
-                    x: 10,
-                    y: 10,
-                    size: 10,
-                    color: '#666'
-                });
+                    g.nodes.push({
+                        id: 'b',
+                        label: 'world',
+                        x: 10,
+                        y: 10,
+                        size: 10,
+                        color: '#666'
+                    });
 
-                g.edges.push({
-                    id: 'e1',
-                    source: 'a',
-                    target: 'b',
-                    size: 10,
-                    type: 'curve',
-                    color: '#ccc',
-                    hover_color: '#000'
-                });
+                    g.edges.push({
+                        id: 'e1',
+                        source: 'a',
+                        target: 'b',
+                        size: 10,
+                        type: 'curve',
+                        color: '#ccc',
+                        hover_color: '#000'
+                    });
 
-                s = new sigma({
-                    graph: g,
-                    renderer: {
-                        container: document.getElementById('graph-container'),
-                        type: 'canvas'
-                    },
-                    settings: {
-                        doubleClickEnabled: false,
-                        minEdgeSize: 0.5,
-                        maxEdgeSize: 4,
-                        enableEdgeHovering: true,
-                        edgeHoverColor: 'edge',
-                        defaultEdgeHoverColor: '#000',
-                        edgeHoverSizeRatio: 1,
-                        edgeHoverExtremities: true,
-                    }
-                });
+                    s = new sigma({
+                        graph: g,
+                        renderer: {
+                            container: document.getElementById('graph-container'),
+                            type: 'canvas'
+                        },
+                        settings: {
+                            doubleClickEnabled: false,
+                            minEdgeSize: 0.5,
+                            maxEdgeSize: 4,
+                            enableEdgeHovering: true,
+                            edgeHoverColor: 'edge',
+                            defaultEdgeHoverColor: '#000',
+                            edgeHoverSizeRatio: 1,
+                            edgeHoverExtremities: true,
+                        }
+                    });
 
-                s.bind('clickNode doubleClickNode rightClickNode', function (e) {
-                    console.log(e.type, e.data.node.label, e.data.captor);
-                    document.getElementById("hidValue1").value = e.data.node.label;
-                });
-            </script>
+                    s.bind('clickNode doubleClickNode rightClickNode', function (e) {
+                        console.log(e.type, e.data.node.label, e.data.captor);
+                        document.getElementById("hidValue1").value = e.data.node.label;
+                    });
+                </script>
+            </div>
 
             <div style="border-style: solid; border-width: medium; border-color: #ccc;">
-                <a style="color: #000000">当前分支：</a><a style="color: #000000">当前版本:</a>
+                <a style="color: #000000">当前分支：</a><a style="color: #000000">当前版本:</a><a style="color: #000000">创建时间：</a>
                 <br />
                 <a style="color: #000000">当前版本描述：</a>
                 <br />
+                <asp:Button ID="copyButton" CssClass="nemobutton" Text="签出该版本" runat="server" />
                 <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" />
-                <input id="createBranch" class="nemobutton" type="button" value="创建分支" />                
-                <input id="deleteBranch" class="nemobutton" type="button" value="删除分支" />
+                <input id="createBranch" class="nemobutton" type="button" value="创建分支" onclick="window.location.href = 'create_branch_page.aspx'"/>      
+                <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
                 <br />
 
                 <a style="color: #000000">选中分支：</a><a style="color: #000000">选中版本:</a>
@@ -303,7 +304,6 @@
                     <p>ssss</p>
                     <p>ssss</p>
                 </div>
-                <div style="float: left; width:2%;border-style: solid; border-width: medium; border-color: #ccc;height:inherit"></div>
                 <div id="file_content" style="float: right; width: 70%;" runat="server">
                     <dl>
                         <dt>Coffee</dt>
