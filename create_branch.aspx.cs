@@ -28,11 +28,12 @@ public partial class create_branch : System.Web.UI.Page
         User u = new User();
         u.user_id = 0;
         ud.SelectByID(ref u);
+        Session["user"] = u;
 
         if (Session["user"] == null)
         {
-            //Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
-            //return;
+            Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
+            return;
         }
 
         string vid_str = Request.QueryString["vid"];
@@ -116,6 +117,13 @@ public partial class create_branch : System.Web.UI.Page
         }
 
         //create files
+        if (!FileSystem.CopyFolder(Server.MapPath("~/") +@"data\"+v.warehouse_id.ToString() + @"\"+v.version_id.ToString(), Server.MapPath("~/") + @"data\" + v.warehouse_id.ToString() + @"\" + v2.version_id.ToString()))
+        {
+            vd.Delete(ref v2);
+            bd.Delete(b.branch_id);
+            Response.Write("<script>alert('file error.');</script>");
+            return;
+        }
 
         Response.Write("<script>alert('create success.');</script>");
     }

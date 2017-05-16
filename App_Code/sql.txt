@@ -1,0 +1,9 @@
+﻿--create table
+
+--clear table
+truncate table branch_table;
+insert into branch_table values(0,0,0,0,0,'','','');
+truncate table version_table;
+insert into version_table values(0,0,0,0,0,'','','',0);
+truncate table warehouse_table;
+insert into warehouse_table values(0,0,0,0,'','',0,'');

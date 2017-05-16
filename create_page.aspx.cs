@@ -96,7 +96,7 @@ public partial class create_page : System.Web.UI.Page
         b.warehouse_id = w.warehouse_id;
         b.user_id = u.user_id;
         b.start_id = v.version_id;
-        b.end_id = v.version_id;
+        b.end_id = 0;
         b.branch_name = "master";
         b.description = "master";
         if (bd.Insert(ref b))
@@ -122,7 +122,7 @@ public partial class create_page : System.Web.UI.Page
         }
 
         //crete files
-        if(!FileSystem.CreateFolder(@"d:\Documents\Visual Studio 2015\WebSites\VersionControl\data\" + w.warehouse_id.ToString() +@"\" + v.version_id.ToString()))
+        if(!FileSystem.CreateFolder(Server.MapPath("~/") + w.warehouse_id.ToString() +@"\" + v.version_id.ToString()))
         {
             wd.Delete(ref w);
             vd.Delete(ref v);
