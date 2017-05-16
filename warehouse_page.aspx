@@ -203,8 +203,6 @@
                 <script>
                     var i,
                         s,
-                        N = 20,
-                        E = 200,
                         g = {
                             nodes: [],
                             edges: []

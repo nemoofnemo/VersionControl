@@ -79,13 +79,8 @@ public partial class warehouse_page : System.Web.UI.Page
 
     }
 
-    protected void Button1_Click(object sender, EventArgs e)
-    {
-        
-    }
-
     protected void createBranch_Click(object sender, EventArgs e)
     {
-        
+        Response.Redirect("create_branch.aspx?vid="+vid.ToString());
     }
 }
