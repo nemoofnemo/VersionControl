@@ -276,13 +276,13 @@
                 <br />
                 <asp:Button ID="copyButton" CssClass="nemobutton" Text="签出该版本" runat="server" />
                 <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" />
-                <input id="createBranch" class="nemobutton" type="button" value="创建分支" onclick="window.location.href = 'create_branch_page.aspx'"/>      
+                <asp:Button ID="createBranch" CssClass="nemobutton" Text="创建分支" runat="server" OnClick="createBranch_Click" />
                 <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
                 <br />
 
                 <a style="color: #000000">选中分支：</a><a style="color: #000000">选中版本:</a>
                 <br />
-                <input id="jumoVersion" class="nemobutton" type="button" value="查看选中版本" />
+                <input id="jumpVersion" class="nemobutton" type="button" value="查看选中版本" />
                 <%-- jump to create page --%>
                 
                 <input id="redoVersion" class="nemobutton" type="button" value="回滚至选中版本" />

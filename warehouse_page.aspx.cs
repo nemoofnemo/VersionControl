@@ -83,4 +83,9 @@ public partial class warehouse_page : System.Web.UI.Page
     {
         
     }
+
+    protected void createBranch_Click(object sender, EventArgs e)
+    {
+        
+    }
 }

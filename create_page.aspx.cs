@@ -17,7 +17,7 @@ public partial class create_page : System.Web.UI.Page
         //Session["user"] = u;
 
         if(Session["user"] == null){
-            Response.Write("<script>alert('please login.');window.location.href='login_page.aspx';</script>");
+            Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
             return;
         }
         else
@@ -31,7 +31,7 @@ public partial class create_page : System.Web.UI.Page
     {
         if(Session["user"] == null)
         {
-            Response.Write("<script>alert('please login.');window.location.href='login_page.aspx';</script>");
+            Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
             return;
         }
 
