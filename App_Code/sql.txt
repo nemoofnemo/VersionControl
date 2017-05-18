@@ -1,9 +1,16 @@
 ﻿--create table
+Create table user_table( user_id int primary key,username nvarchar(64) not null,user_account nvarchar(64) not null,user_password nvarchar(64) not null,register_time nvarchar(32) default '' not null,user_description nvarchar(256) default '' not null,user_type int default 0 not null );
+
+Create table warehouse_table(warehouse_id int primary key,user_id int not null,organization_id int default 0 not null,warehouse_type int default 0 not null,create_time varchar(32) default '' not null, warehouse_description varchar(512) default '' not null, master_version_id int default 0 not null, warehouse_name varchar(64) not null default '');
+
+create table version_table(version_id int primary key, warehouse_id int not null default 0, user_id int not null default 0, prev_id int not null default 0, next_id int not null default 0,timestamp varchar(32) not null default '',version_name varchar(64) not null default '', description varchar(512) not null default '', branch_id int not null default 0);
+
+create table branch_table(branch_id int primary key not null, warehouse_id int not null default 0, user_id int not null default 0,start_id int not null default 0, end_id int not null default 0,timestamp varchar(32) not null default '', branch_name varchar(64) not null default '', description varchar(1024) not null default '');
 
 --clear table
 truncate table branch_table;
-insert into branch_table values(0,0,0,0,0,'','','');
+insert into branch_table values(0,0,0,0,0,'time','master','description');
 truncate table version_table;
-insert into version_table values(0,0,0,0,0,'','','',0);
+insert into version_table values(0,0,0,0,0,'0','0','0',0);
 truncate table warehouse_table;
-insert into warehouse_table values(0,0,0,0,'','',0,'');
+insert into warehouse_table values(0,0,0,0,'0','0',0,'0');

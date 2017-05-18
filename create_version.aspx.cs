@@ -19,10 +19,10 @@ public partial class create_branch : System.Web.UI.Page
         vd = new VersionDAL();
         
         //debug
-        User u = new User();
-        u.user_id = 0;
-        ud.SelectByID(ref u);
-        Session["user"] = u;
+        //User u = new User();
+        //u.user_id = 0;
+        //ud.SelectByID(ref u);
+        //Session["user"] = u;
 
         if (Session["user"] == null)
         {
@@ -32,10 +32,12 @@ public partial class create_branch : System.Web.UI.Page
 
         string vid_str = Request.QueryString["vid"];
         //debug
-        vid_str = "0";
+        //vid_str = "0";
         if (vid_str == null)
         {
             //error
+            Response.Write("<script>alert('invalid vid.');window.location.href='login.aspx';</script>");
+            return;
         }
 
         int vid;
@@ -57,6 +59,13 @@ public partial class create_branch : System.Web.UI.Page
 
     protected void createButton_Click(object sender, EventArgs e)
     {
+        User u = Session["user"] as User;
+        if (u.user_id != v.user_id)
+        {
+            Response.Write("<script>alert('invalid user.');</script>");
+            return;
+        }
+
         if(name.Value.Length == 0 || desc.Value.Length == 0)
         {
             //error
@@ -109,11 +118,13 @@ public partial class create_branch : System.Web.UI.Page
         //warnning ; bug here
         Branch b = new Branch();
         b.branch_id = v.branch_id;
+        bd = new BranchDAL();
         bd.SelectByID(ref b);
         if (b.branch_name == "master")
         {
             Warehouse w = new Warehouse();
             w.warehouse_id = v.warehouse_id;
+            wd = new WarehouseDAL();
             wd.SelectedByID(ref w);
             if(w.master_version_id == v.version_id)
             {
