@@ -273,7 +273,7 @@
                 <a id="curDesc" class="nemotext" runat="server">当前版本描述：</a>
                 <br />
                 <asp:Button ID="copyButton" CssClass="nemobutton" Text="签出该版本" runat="server" />
-                <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" />
+                <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" OnClick="pushNew_Click" />
                 <asp:Button ID="createBranch" CssClass="nemobutton" Text="创建分支" runat="server" OnClick="createBranch_Click" />
                 <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
                 <br />
