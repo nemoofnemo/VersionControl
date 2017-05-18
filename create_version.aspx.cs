@@ -36,7 +36,7 @@ public partial class create_branch : System.Web.UI.Page
         if (vid_str == null)
         {
             //error
-            Response.Write("<script>alert('invalid vid.');window.location.href='login.aspx';</script>");
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -44,7 +44,7 @@ public partial class create_branch : System.Web.UI.Page
         if (int.TryParse(vid_str,out vid) == false)
         {
             //error
-            Response.Write("<script>alert('invalid vid.');</script>");
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -52,7 +52,7 @@ public partial class create_branch : System.Web.UI.Page
         v.version_id = vid;
         if(vd.SelectByID(ref v) == false)
         {
-            Response.Write("<script>alert('invalid vid.');</script>");
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
             return;
         }
     }

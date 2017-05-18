@@ -25,10 +25,10 @@ public partial class create_branch : System.Web.UI.Page
         vd = new VersionDAL();
         
         //debug
-        User u = new User();
-        u.user_id = 0;
-        ud.SelectByID(ref u);
-        Session["user"] = u;
+        //User u = new User();
+        //u.user_id = 0;
+        //ud.SelectByID(ref u);
+        //Session["user"] = u;
 
         if (Session["user"] == null)
         {
@@ -38,17 +38,19 @@ public partial class create_branch : System.Web.UI.Page
 
         string vid_str = Request.QueryString["vid"];
         //debug
-        vid_str = "0";
+        //vid_str = "0";
         if (vid_str == null)
         {
             //error
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
+            return;
         }
 
         int vid;
         if (int.TryParse(vid_str,out vid) == false)
         {
             //error
-            Response.Write("<script>alert('invalid vid.');</script>");
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -56,7 +58,7 @@ public partial class create_branch : System.Web.UI.Page
         v.version_id = vid;
         if(vd.SelectByID(ref v) == false)
         {
-            Response.Write("<script>alert('invalid vid.');</script>");
+            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
             return;
         }
     }

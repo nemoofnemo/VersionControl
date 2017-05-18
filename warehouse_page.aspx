@@ -201,16 +201,14 @@
             </div>
             <div id="graph_script" runat="server">
                 <script>
-                    var i,
-                        s,
-                        g = {
-                            nodes: [],
-                            edges: []
-                        };
+                    var g = {
+                        nodes: [],
+                        edges: []
+                    };
 
                     g.nodes.push({
-                        id: 'a',
-                        label: 'hello',
+                        id: '1',
+                        label: 'master:1',
                         x: 0,
                         y: 0,
                         size: 10,
@@ -218,8 +216,8 @@
                     });
 
                     g.nodes.push({
-                        id: 'b',
-                        label: 'world',
+                        id: '2',
+                        label: 'aaaa:2',
                         x: 10,
                         y: 10,
                         size: 10,
@@ -227,9 +225,9 @@
                     });
 
                     g.edges.push({
-                        id: 'e1',
-                        source: 'a',
-                        target: 'b',
+                        id: '1',
+                        source: '1',
+                        target: '2',
                         size: 10,
                         type: 'curve',
                         color: '#ccc',
@@ -255,11 +253,14 @@
                     });
 
                     s.bind('clickNode doubleClickNode rightClickNode', function (e) {
-                        console.log(e.type, e.data.node.label, e.data.captor);
-                        document.getElementById("hidValue1").value = e.data.node.label;
+                        var str = '' + e.data.node.label;
+                        var arr = str.split(':', 2);
+                        document.getElementById("selectedBranch").innerText = '选中分支:' + arr[0];
+                        document.getElementById("selectedVersion").innerText = '选中版本:' + arr[1];
                     });
                 </script>
             </div>
+            
             <style>
                 .nemotext{
                     color: #000000
@@ -278,7 +279,7 @@
                 <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
                 <br />
 
-                <a style="color: #000000">选中分支：</a><a style="color: #000000">选中版本:</a>
+                <a id="selectedBranch" style="color: #000000">选中分支:</a>&nbsp<a id="selectedVersion" style="color: #000000">选中版本:</a>
                 <br />
                 <input id="jumpVersion" class="nemobutton" type="button" value="查看选中版本" />
                 <%-- jump to create page --%>
@@ -321,59 +322,10 @@
         </form>
 
         <footer id="gtco-footer" role="contentinfo">
-            <div class="gtco-container">
-                <div class="row row-pb-md">
-
-                    <div class="col-md-4">
-                        <div class="gtco-widget">
-                            <h3>About Us</h3>
-                            <p>aaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 col-md-push-1">
-                        <div class="gtco-widget">
-                            <h3>Links</h3>
-                            <ul class="gtco-footer-links">
-                                <li><a href="#">Knowledge Base</a></li>
-                                <li><a href="#">Career</a></li>
-                                <li><a href="#">Press</a></li>
-                                <li><a href="#">Terms of services</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="gtco-widget">
-                            <h3>Get In Touch</h3>
-                            <ul class="gtco-quick-contact">
-                                <li><a href="#"><i class="icon-phone"></i>+1 234 567 890</a></li>
-                                <li><a href="#"><i class="icon-mail2"></i>info@gettemplates.co</a></li>
-                                <li><a href="#"><i class="icon-chat"></i>Live Chat</a></li>
-                            </ul>
-                        </div>
-                    </div>
-
+            <div class="row copyright">
+                <div class="col-md-12">
+                    <small class="block">&copy; 2016 nemo. All Rights Reserved.</small>
                 </div>
-
-                <div class="row copyright">
-                    <div class="col-md-12">
-                        <p class="pull-left">
-                            <small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
-                            <small class="block">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> Demo Images: <a href="#" target="_blank">Unsplash</a></small>
-                        </p>
-                        <p class="pull-right">
-                            <ul class="gtco-social-icons pull-right">
-                                <li><a href="#"><i class="icon-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon-linkedin"></i></a></li>
-                                <li><a href="#"><i class="icon-dribbble"></i></a></li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-
             </div>
         </footer>
     </div>

@@ -98,7 +98,8 @@ public partial class warehouse_page : System.Web.UI.Page
 
         if (!bd.SelectByWarehouseID(wid, ref branchList))
         {
-
+            //error
+            return;
         }
 
         //find master
@@ -177,7 +178,7 @@ public partial class warehouse_page : System.Web.UI.Page
                 }
                 Node n = new Node();
                 n.vid = v.version_id;
-                n.lable = b.branch_name + n.vid.ToString();
+                n.lable = b.branch_name +":" + n.vid.ToString();
                 n.x = curX;
                 n.y = curY;
                 curX += 10;

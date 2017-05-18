@@ -105,33 +105,33 @@ public partial class create_page : System.Web.UI.Page
         }
         else
         {
+            Response.Write("<script>alert('error: branch insert');</script>");
             wd.Delete(ref w);
             vd.Delete(ref v);
-            Response.Write("<script>alert('error: branch insert');</script>");
             return;
         }
 
         v.branch_id = b.branch_id;
         if(!vd.Update(ref v))
         {
+            Response.Write("<script>alert('error: version update');</script>");
             wd.Delete(ref w);
             vd.Delete(ref v);
             bd.Delete(b.branch_id);
-            Response.Write("<script>alert('error: version update');</script>");
             return;
         }
 
         //crete files
-        if(!FileSystem.CreateFolder(Server.MapPath("~/") + w.warehouse_id.ToString() +@"\" + v.version_id.ToString()))
+        if(FileSystem.CreateFolder(Server.MapPath("~/") +@"data\" + w.warehouse_id.ToString() +@"\" + v.version_id.ToString()) == false)
         {
+            Response.Write("<script>alert('error: file error');</script>");
             wd.Delete(ref w);
             vd.Delete(ref v);
             bd.Delete(b.branch_id);
-            Response.Write("<script>alert('error: file error');</script>");
             return;
         }
 
         //create success
-        Response.Write("<script>alert('create success.');window.location.href='user_page.aspx'?uid="+u.user_id.ToString()+";</script>");
+        Response.Write("<script>alert('create success.');window.location.href='user_page.aspx?uid="+u.user_id.ToString()+"';</script>");
     }
 }
