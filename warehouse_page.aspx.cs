@@ -74,7 +74,10 @@ public partial class warehouse_page : System.Web.UI.Page
         curDesc.InnerText = "当前版本描述：" + v.description;
 
         //draw
-        DrawGraph();
+        if (!DrawGraph())
+        {
+
+        }
     }
 
     private struct Node
@@ -92,7 +95,7 @@ public partial class warehouse_page : System.Web.UI.Page
         public int dest;
     }
 
-    protected void DrawGraph()
+    protected bool DrawGraph()
     {
         List<Branch> branchList = new List<Branch>();
         ArrayList nodes = new ArrayList();
@@ -101,7 +104,7 @@ public partial class warehouse_page : System.Web.UI.Page
         if (!bd.SelectByWarehouseID(wid, ref branchList))
         {
             //error
-            return;
+            return false;
         }
 
         //find master
@@ -120,7 +123,7 @@ public partial class warehouse_page : System.Web.UI.Page
         if(masterBranchID == -1)
         {
             //error
-            return;
+            return false;
         }
 
         int curX = 0;
@@ -136,7 +139,7 @@ public partial class warehouse_page : System.Web.UI.Page
             if(!vd.SelectByID(ref v))
             {
                 //error
-                return;
+                return false;
             }
             Node n = new Node();
             n.vid = v.version_id;
@@ -168,16 +171,33 @@ public partial class warehouse_page : System.Web.UI.Page
             {
                 continue;
             }
+            for(int i = 0; i < nodes.Count; ++i)
+            {
+                
+            }
             curX = 0;
             curY += 10;
+            isFirst = true;
             v.version_id = b.start_id;
             while (v.version_id != 0)
             {
                 if (!vd.SelectByID(ref v))
                 {
-                    //error
-                    return;
+                    return false;
                 }
+                if (isFirst)
+                {
+                    int i = 0;
+                    for(;i < nodes.Count; ++i)
+                    {
+                        if(v.prev_id == ((Node)nodes[i]).vid)
+                        {
+                            curX = 10 * i;
+                        }
+                    }
+                    isFirst = false;
+                }
+
                 Node n = new Node();
                 n.vid = v.version_id;
                 n.lable = b.branch_name +":" + n.vid.ToString();
@@ -214,6 +234,7 @@ public partial class warehouse_page : System.Web.UI.Page
         js += "s.bind('clickNode doubleClickNode rightClickNode', function (e) {var str = '' + e.data.node.label;var arr = str.split(':', 2);document.getElementById('selectedBranch').innerText = '选中分支:' + arr[0];document.getElementById('selectedVersion').innerText= arr[1];document.getElementById('hidValue').value = arr[1];});</script>";
 
         graph_script.InnerHtml = js;
+        return true;
     }
 
     protected void createBranch_Click(object sender, EventArgs e)

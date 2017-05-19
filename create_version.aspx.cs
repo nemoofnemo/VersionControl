@@ -19,10 +19,10 @@ public partial class create_branch : System.Web.UI.Page
         vd = new VersionDAL();
 
         //debug
-        User u = new User();
-        u.user_id = 1;
-        ud.SelectByID(ref u);
-        Session["user"] = u;
+        //User u = new User();
+        //u.user_id = 1;
+        //ud.SelectByID(ref u);
+        //Session["user"] = u;
 
         if (Session["user"] == null)
         {
@@ -32,7 +32,7 @@ public partial class create_branch : System.Web.UI.Page
 
         string vid_str = Request.QueryString["vid"];
         //debug
-        vid_str = "6";
+        //vid_str = "6";
         //Response.Write("<script>alert('shit" +vid_str+"');</script>");
         if (vid_str == null)
         {
