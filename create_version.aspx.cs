@@ -32,7 +32,7 @@ public partial class create_branch : System.Web.UI.Page
 
         string vid_str = Request.QueryString["vid"];
         //debug
-        vid_str = "5";
+        vid_str = "6";
         //Response.Write("<script>alert('shit" +vid_str+"');</script>");
         if (vid_str == null)
         {
