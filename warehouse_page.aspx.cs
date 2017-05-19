@@ -39,8 +39,8 @@ public partial class warehouse_page : System.Web.UI.Page
         }
 
         //debug!!!!!!!!!!!!!!!!!!!!!!!
-        wid = 1;
-        vid = 1;
+        //wid = 1;
+        //vid = 1;
 
         w = new Warehouse();
         w.warehouse_id = wid;
@@ -206,7 +206,7 @@ public partial class warehouse_page : System.Web.UI.Page
 
         foreach(Edge e in edges)
         {
-            js += "g.edges.push({id:'" + e.edgeId.ToString() + "',source:'" + e.src.ToString() + "',target:'" + e.dest.ToString() + "',size: 10,type: 'curve',color: '#ccc',hover_color: '#000'}); ";
+            js += "g.edges.push({id:'" + e.edgeId.ToString() + "',source:'" + e.src.ToString() + "',target:'" + e.dest.ToString() + "',size:10,color: '#ccc',hover_color:'#000'}); ";
         }
 
         js += "s = new sigma({graph: g,renderer:{container: document.getElementById('graph-container'),type: 'canvas'},settings:{doubleClickEnabled: false,minEdgeSize: 0.5,maxEdgeSize: 4,enableEdgeHovering: true,edgeHoverColor: 'edge',defaultEdgeHoverColor: '#000',edgeHoverSizeRatio: 1,edgeHoverExtremities: true,}});";

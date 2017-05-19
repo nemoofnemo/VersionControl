@@ -17,12 +17,12 @@ public partial class create_branch : System.Web.UI.Page
     {
         ud = new UserDAL();
         vd = new VersionDAL();
-        
+
         //debug
-        //User u = new User();
-        //u.user_id = 0;
-        //ud.SelectByID(ref u);
-        //Session["user"] = u;
+        User u = new User();
+        u.user_id = 1;
+        ud.SelectByID(ref u);
+        Session["user"] = u;
 
         if (Session["user"] == null)
         {
@@ -32,7 +32,7 @@ public partial class create_branch : System.Web.UI.Page
 
         string vid_str = Request.QueryString["vid"];
         //debug
-        //vid_str = "0";
+        vid_str = "5";
         //Response.Write("<script>alert('shit" +vid_str+"');</script>");
         if (vid_str == null)
         {
@@ -86,6 +86,7 @@ public partial class create_branch : System.Web.UI.Page
             return;
         }
 
+        //new version
         Version v2 = new Version();
         v2.version_name = name.Value;
         v2.description = desc.Value;
@@ -141,11 +142,11 @@ public partial class create_branch : System.Web.UI.Page
             wd.SelectedByID(ref w);
             if(w.master_version_id == v.version_id)
             {
-                w.master_version_id = v3.version_id;
+                w.master_version_id = v2.version_id;
                 wd.Update(ref w);
             }
         }
 
-        Response.Write("<script>alert('create success.');window.location.href='warehouse_page.aspx?wid=" +v.warehouse_id +"&vid=" +v3.version_id + "';</script>");
+        Response.Write("<script>alert('create success.');window.location.href='warehouse_page.aspx?wid=" +v.warehouse_id +"&vid=" +v2.version_id + "';</script>");
     }
 }

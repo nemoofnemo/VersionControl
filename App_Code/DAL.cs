@@ -149,7 +149,6 @@ public class WarehouseDAL
         reader = sqlServerDB.ExecuteReader(cmd);
         if (reader.Read())
         {
-            w.warehouse_id = reader.GetInt32(0);
             w.user_id = reader.GetInt32(1);
             w.organization_id = w.warehouse_id = reader.GetInt32(2);
             w.warehouse_type = reader.GetInt32(3);
