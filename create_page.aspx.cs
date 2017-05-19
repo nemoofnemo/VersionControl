@@ -16,7 +16,7 @@ public partial class create_page : System.Web.UI.Page
         //userDAL.SelectByID(ref u);
         //Session["user"] = u;
 
-        if(Session["user"] == null){
+        if (Session["user"] == null){
             Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
             return;
         }

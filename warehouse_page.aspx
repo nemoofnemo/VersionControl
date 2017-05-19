@@ -175,7 +175,7 @@
         <form id="form1" runat="server">
             <%-- sigma graph --%>
             <div style="background-color: #ccc"><a style="background-color: #ccc;">Graph:</a></div>
-            <asp:HiddenField ID="hidValue1" runat="server" />
+            <asp:HiddenField ID="hidValue" runat="server" />
             <div id="sigma_container">
                 <style>
                     #graph-container {
@@ -256,7 +256,8 @@
                         var str = '' + e.data.node.label;
                         var arr = str.split(':', 2);
                         document.getElementById("selectedBranch").innerText = '选中分支:' + arr[0];
-                        document.getElementById("selectedVersion").innerText = '选中版本:' + arr[1];
+                        document.getElementById("selectedVersion").innerText = arr[1];
+                        document.getElementById("hidValue").value = arr[1];
                     });
                 </script>
             </div>
@@ -279,11 +280,11 @@
                 <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
                 <br />
 
-                <a id="selectedBranch" style="color: #000000">选中分支:</a>&nbsp<a id="selectedVersion" style="color: #000000">选中版本:</a>
+                <a id="selectedBranch" style="color: #000000">选中分支:</a>&nbsp
+                <a class="nemotext">选中版本:</a>
+                <a id="selectedVersion" class="nemotext" runat="server"></a>
                 <br />
-                <input id="jumpVersion" class="nemobutton" type="button" value="查看选中版本" />
-                <%-- jump to create page --%>
-                
+                <asp:Button ID="jumpVersion" CssClass="nemobutton" Text="查看选中版本" runat="server" OnClick="jumpVersion_Click" />
                 <input id="redoVersion" class="nemobutton" type="button" value="回滚至选中版本" />
 
             </div>

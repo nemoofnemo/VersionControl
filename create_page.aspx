@@ -64,7 +64,7 @@
 				<div class="col-md-12">
 
                     <div style="width: 50%; margin-left: auto; margin-right: auto;">
-                        <form id="form1" runat="server" method="get">
+                        <form id="form1" runat="server">
                             <label for="name" class="sr-only">Name</label>
                             <p><input type="text" runat="server" class="form-control" id="name" placeholder="name"></p>
                             <p><input type="text" runat="server" class="form-control" id="desc" placeholder="desc"></p>

@@ -39,8 +39,8 @@ public partial class warehouse_page : System.Web.UI.Page
         }
 
         //debug!!!!!!!!!!!!!!!!!!!!!!!
-        wid = 0;
-        vid = 0;
+        wid = 1;
+        vid = 1;
 
         w = new Warehouse();
         w.warehouse_id = wid;
@@ -73,6 +73,8 @@ public partial class warehouse_page : System.Web.UI.Page
         curTime.InnerText = "修改时间：" + v.timestamp;
         curDesc.InnerText = "当前版本描述：" + v.description;
 
+        //draw
+        DrawGraph();
     }
 
     private struct Node
@@ -196,7 +198,22 @@ public partial class warehouse_page : System.Web.UI.Page
         }
 
         //js
+        string js = "<script>var g = {nodes: [],edges: []};";
+        foreach(Node n in nodes)
+        {
+            js += "g.nodes.push({id:'" + n.vid.ToString() + "',label:'" + n.lable + "',x:" + n.x.ToString() + ",y:"+n.y.ToString() + ",size:10,color:'#666'});";
+        }
 
+        foreach(Edge e in edges)
+        {
+            js += "g.edges.push({id:'" + e.edgeId.ToString() + "',source:'" + e.src.ToString() + "',target:'" + e.dest.ToString() + "',size: 10,type: 'curve',color: '#ccc',hover_color: '#000'}); ";
+        }
+
+        js += "s = new sigma({graph: g,renderer:{container: document.getElementById('graph-container'),type: 'canvas'},settings:{doubleClickEnabled: false,minEdgeSize: 0.5,maxEdgeSize: 4,enableEdgeHovering: true,edgeHoverColor: 'edge',defaultEdgeHoverColor: '#000',edgeHoverSizeRatio: 1,edgeHoverExtremities: true,}});";
+
+        js += "s.bind('clickNode doubleClickNode rightClickNode', function (e) {var str = '' + e.data.node.label;var arr = str.split(':', 2);document.getElementById('selectedBranch').innerText = '选中分支:' + arr[0];document.getElementById('selectedVersion').innerText= arr[1];document.getElementById('hidValue').value = arr[1];});</script>";
+
+        graph_script.InnerHtml = js;
     }
 
     protected void createBranch_Click(object sender, EventArgs e)
@@ -207,5 +224,14 @@ public partial class warehouse_page : System.Web.UI.Page
     protected void pushNew_Click(object sender, EventArgs e)
     {
         Response.Redirect("create_version.aspx?vid=" + vid.ToString());
+    }
+
+    protected void jumpVersion_Click(object sender, EventArgs e)
+    {
+        //Response.Write("<script>alert('"+ hidValue.Value+ "')</script>");
+        if(hidValue.Value.Length > 0)
+            Response.Redirect("warehouse_page.aspx?wid=" + wid.ToString() + "&vid=" + hidValue.Value,false);
+        else
+            Response.Write("<script>alert('invalid vid')</script>");
     }
 }

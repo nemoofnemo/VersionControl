@@ -33,10 +33,11 @@ public partial class create_branch : System.Web.UI.Page
         string vid_str = Request.QueryString["vid"];
         //debug
         //vid_str = "0";
+        //Response.Write("<script>alert('shit" +vid_str+"');</script>");
         if (vid_str == null)
         {
             //error
-            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
+            Response.Write("<script>alert('invalid vid1 : vid is null.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -44,7 +45,7 @@ public partial class create_branch : System.Web.UI.Page
         if (int.TryParse(vid_str,out vid) == false)
         {
             //error
-            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
+            Response.Write("<script>alert('invalid vid2.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -52,17 +53,29 @@ public partial class create_branch : System.Web.UI.Page
         v.version_id = vid;
         if(vd.SelectByID(ref v) == false)
         {
-            Response.Write("<script>alert('invalid vid.');window.opener=null;window.close();</script>");
+            Response.Write("<script>alert('invalid vid in url.');window.opener=null;window.close();</script>");
             return;
         }
     }
 
     protected void createButton_Click(object sender, EventArgs e)
     {
-        User u = Session["user"] as User;
+        User u = (User)Session["user"];
+
+        if(u == null){
+            Response.Write("<script>alert('invalid user 1.');window.opener=null;window.close();</script>");
+            return;
+        }
+
+        if (v == null)
+        {
+            Response.Write("<script>alert('invalid vid in create.');window.opener=null;window.close();</script>");
+            return;
+        }
+
         if (u.user_id != v.user_id)
         {
-            Response.Write("<script>alert('invalid user.');</script>");
+            Response.Write("<script>alert('invalid user.');window.opener=null;window.close();</script>");
             return;
         }
 
@@ -128,11 +141,11 @@ public partial class create_branch : System.Web.UI.Page
             wd.SelectedByID(ref w);
             if(w.master_version_id == v.version_id)
             {
-                w.master_version_id = v2.version_id;
+                w.master_version_id = v3.version_id;
                 wd.Update(ref w);
             }
         }
 
-        Response.Write("<script>alert('create success.');</script>");
+        Response.Write("<script>alert('create success.');window.location.href='warehouse_page.aspx?wid=" +v.warehouse_id +"&vid=" +v3.version_id + "';</script>");
     }
 }

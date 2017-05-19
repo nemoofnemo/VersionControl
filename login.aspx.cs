@@ -7,17 +7,16 @@ using System.Web.UI.WebControls;
 
 public partial class test : System.Web.UI.Page
 {
-    private UserDAL userDAL;
-
     protected void Page_Load(object sender, EventArgs e)
     {
-        userDAL = new UserDAL();
+        
     }
 
     protected void LoginButton_Click(object sender, EventArgs e)
     {
         //Response.Write(Request.QueryString["username"]+ Request.QueryString["password"]);
         User u = new User();
+        UserDAL userDAL = new UserDAL();
         u.user_account = useraccount.Value;
         u.user_password = password.Value;
         if (userDAL.LoginCheck(ref u))

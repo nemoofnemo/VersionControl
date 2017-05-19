@@ -20,8 +20,6 @@
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-	<!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
-	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -64,11 +62,11 @@
 				<div class="col-md-12">
 
                     <div style="width: 50%; margin-left: auto; margin-right: auto;">
-                        <form id="form1" runat="server" method="get">
+                        <form id="form1" runat="server">
                             <label for="name" class="sr-only">Name</label>
                             <p><input type="text" runat="server" class="form-control" id="name" placeholder="name"></p>
                             <p><input type="text" runat="server" class="form-control" id="desc" placeholder="desc"></p>
-                            <asp:Button ID="createButton" runat="server" Class="btn btn-default btn-block" Style="color: white" Text="create" OnClick="createButton_Click" />
+                            <asp:Button ID="createButton" runat="server" CssClass="btn btn-default btn-block" Style="color: white" Text="create" OnClick="createButton_Click" />
                         </form>
                     </div>
 
