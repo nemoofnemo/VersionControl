@@ -45,3 +45,6 @@ Temporary Items
 #custom
 Web.config
 Web.Debug.config
+*.tmp
+/~$4—软件工程专业《毕业设计（论文）》指导规范.doc
+/~$paper.docx
