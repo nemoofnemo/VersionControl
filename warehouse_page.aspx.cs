@@ -255,4 +255,146 @@ public partial class warehouse_page : System.Web.UI.Page
         else
             Response.Write("<script>alert('invalid vid')</script>");
     }
+
+    //---------------------------------------
+    bool checkUser()
+    {
+        if(Session["user"] == null)
+        {
+            return false;
+        }
+        User u = (User)Session["user"];
+        if(u.user_id != w.user_id)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    bool deleteFrom(int id)
+    {
+        Version v2 = new Version();
+        v2.version_id = id;
+        bool isFirst = true;
+        while (true)
+        {
+            if(v2.version_id == 0)
+            {
+                break;
+            }
+            if(!vd.SelectByID(ref v2))
+            {
+                return false;
+            }
+
+            if (!isFirst)
+            {
+                //warnning
+                vd.Delete(ref v2);
+                //remove files
+                FileSystem.RemoveFolder(Server.MapPath("~/") + @"data\" + v2.warehouse_id.ToString() + @"\" + v2.version_id.ToString());
+            }
+            else
+            {
+                isFirst = false;
+            }
+
+            v2.version_id = v2.next_id;
+        }
+        return true;
+    }
+    
+
+    protected void redoVersion_Click(object sender, EventArgs e)
+    {
+        if (!checkUser())
+        {
+            Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
+            return;
+        }
+
+        Version v2 = new Version();
+        v2.version_id = int.Parse(hidValue.Value);
+        vd.SelectByID(ref v2);
+
+        Branch b2 = new Branch();
+        b2.branch_id = v2.branch_id;
+        if (!bd.SelectByID(ref b2))
+        {
+            Response.Write("<script>alert('invalid argument.')</script>");
+            return;
+        }
+
+        Warehouse w2 = new Warehouse();
+        w2.warehouse_id = v2.warehouse_id;
+        if (!wd.SelectedByID(ref w2))
+        {
+            Response.Write("<script>alert('invalid argument.')</script>");
+            return;
+        }
+
+        if (b2.branch_name == "master")
+        {
+            deleteFrom(v2.version_id);
+            w2.master_version_id = v2.version_id;
+            wd.Update(ref w2);
+        }
+        else
+        {
+            deleteFrom(v2.version_id);
+        }
+        Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid="+w2.warehouse_id.ToString()+"?vid="+w2.master_version_id.ToString()+"';</script>");
+    }
+
+    void deleteBranchEx() {
+        Version v2 = new Version();
+        v2.version_id = int.Parse(hidValue.Value);//warnning
+        if (!vd.SelectByID(ref v2))
+        {
+            Response.Write("<script>alert('invalid argument.')</script>");
+            return;
+        }
+        bd.Delete(v2.branch_id);
+        while (true)
+        {
+            if (v2.version_id == 0)
+            {
+                break;
+            }
+            if (!vd.SelectByID(ref v2))
+            {
+                return ;
+            }
+
+            //warnning
+            vd.Delete(ref v2);
+            //remove files
+            FileSystem.RemoveFolder(Server.MapPath("~/") + @"data\" + v2.warehouse_id.ToString() + @"\" + v2.version_id.ToString());
+
+            v2.version_id = v2.next_id;
+        }
+    }
+
+    protected void deleteBranch_Click(object sender, EventArgs e)
+    {
+        if (!checkUser())
+        {
+            Response.Write("<script>alert('please login.');window.location.href='login.aspx';</script>");
+            return;
+        }
+
+        if (b.branch_name == "master")
+        {
+            Response.Write("<script>alert('cannot delete branch master')</script>");
+        }
+        else
+        {
+            deleteBranchEx();
+            Response.Write("<script>alert('delete success');</script>");
+        }
+        Warehouse w2 = new Warehouse();
+        w2.warehouse_id = w.warehouse_id;
+        wd.SelectedByID(ref w2);
+        Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid=" + w2.warehouse_id.ToString() + "?vid=" + w2.master_version_id.ToString() + "';</script>");
+    }
 }

@@ -277,7 +277,7 @@
                 <asp:Button ID="copyButton" CssClass="nemobutton" Text="签出该版本" runat="server" />
                 <asp:Button ID="pushNew" CssClass="nemobutton" Text="推送新版本" runat="server" OnClick="pushNew_Click" />
                 <asp:Button ID="createBranch" CssClass="nemobutton" Text="创建分支" runat="server" OnClick="createBranch_Click" />
-                <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" />
+                <asp:Button ID="deleteBranch" CssClass="nemobutton" Text="删除当前分支" runat="server" OnClick="deleteBranch_Click" />
                 <br />
 
                 <a id="selectedBranch" style="color: #000000">选中分支:</a>&nbsp
@@ -285,8 +285,7 @@
                 <a id="selectedVersion" class="nemotext" runat="server"></a>
                 <br />
                 <asp:Button ID="jumpVersion" CssClass="nemobutton" Text="查看选中版本" runat="server" OnClick="jumpVersion_Click" />
-                <input id="redoVersion" class="nemobutton" type="button" value="回滚至选中版本" />
-
+                <asp:Button ID="redoVersion" CssClass="nemobutton" Text="回滚至选中版本" runat="server" OnClick="redoVersion_Click" />
             </div>
 
             <%-- file list and file content --%>
