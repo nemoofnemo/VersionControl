@@ -16,6 +16,7 @@ public partial class warehouse_page : System.Web.UI.Page
     BranchDAL bd;
     int wid;
     int vid;
+    string root;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -39,8 +40,8 @@ public partial class warehouse_page : System.Web.UI.Page
         }
 
         //debug!!!!!!!!!!!!!!!!!!!!!!!
-        //wid = 1;
-        //vid = 1;
+        wid = 1;
+        vid = 1;
 
         w = new Warehouse();
         w.warehouse_id = wid;
@@ -77,6 +78,31 @@ public partial class warehouse_page : System.Web.UI.Page
         if (!DrawGraph())
         {
 
+        }
+
+        //init file explorer
+        root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
+        listBox.Items.Clear();
+        //file_content.InnerText = "";
+        if (FileSystem.IsFolder(root))
+        {
+            string[] folderList = FileSystem.GetFolderList(root);
+            if (folderList != null)
+            {
+                foreach (string s in folderList)
+                {
+                    listBox.Items.Add(s + @"\");
+                }
+            }
+            string[] fileList = FileSystem.GetFileList(root);
+            if(fileList != null)
+            {
+                foreach (string s in fileList)
+                {
+                    listBox.Items.Add(s);
+                }
+            }
+            listBox.AutoPostBack = true;
         }
     }
 
@@ -396,5 +422,16 @@ public partial class warehouse_page : System.Web.UI.Page
         w2.warehouse_id = w.warehouse_id;
         wd.SelectedByID(ref w2);
         Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid=" + w2.warehouse_id.ToString() + "?vid=" + w2.master_version_id.ToString() + "';</script>");
+    }
+
+    protected void listBox_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        foreach(ListItem item in listBox.Items)
+        {
+            if (item.Selected)
+            {
+                file_content.InnerText = item.Text;
+            }
+        }
     }
 }

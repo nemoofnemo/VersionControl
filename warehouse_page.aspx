@@ -291,43 +291,34 @@
             <%-- file list and file content --%>
             <div style="border-style: solid; border-width: medium; border-color: #ccc">
                 <asp:ImageButton ID="backwardButton" runat="server" ImageUrl="~/images/backward.png" Height="32px" Width="32px" />
-                <asp:ImageButton ID="forwardButton" runat="server" ImageUrl="~/images/forward.png" Height="32px" Width="32px" />
+                <%--<asp:ImageButton ID="forwardButton" runat="server" ImageUrl="~/images/forward.png" Height="32px" Width="32px" />--%>
                 <asp:ImageButton ID="rootButton" runat="server" ImageUrl="~/images/root.png" Height="32px" Width="32px" />
                 <asp:ImageButton ID="createFileButton" runat="server" ImageUrl="~/images/file.png" Height="32px" Width="32px" />
                 <asp:ImageButton ID="createFolderButton" runat="server" ImageUrl="~/images/folder.png" Height="32px" Width="32px" />
                 &nbsp;
-                <asp:Label ID="Label1" runat="server" Text="  Path:" Font-Size="34px"></asp:Label>
-                <asp:Label ID="pathLabel" runat="server" Text="/" Font-Size="34px"></asp:Label>
+                <asp:Label ID="Label1" runat="server" Text="  Path:\" Font-Size="34px"></asp:Label>
+                <asp:Label ID="pathLabel" runat="server" Text="" Font-Size="34px"></asp:Label>
             </div>
             
             <%-- list --%>
             <div style="border-style: solid; border-width: medium; border-color: #ccc">
                 <div id="file_list" style="float: left; width: 30%" runat="server">
-                    <p>ssss</p>
-                    <p>ssss</p>
-                    <p>ssss</p>
-                    <p>ssss</p>
-                    <p>ssss</p>
+                    <asp:ListBox ID="listBox" Width="100%" Height="400px" runat="server" OnSelectedIndexChanged="listBox_SelectedIndexChanged">
+                    </asp:ListBox>
                 </div>
+                
                 <div id="file_content" style="float: right; width: 70%;" runat="server">
-                    <dl>
-                        <dt>Coffee</dt>
-                        <dd>Black hot drinkddddddddddddddddddddddddddddddddddddddddddd</dd>
-                        <dt>Milk</dt>
-                        <dd>White cold drink</dd>
-                    </dl>
+
                 </div>
                 <div style="clear: both; height: 0; font-size: 1px; line-height: 0px;"></div>
             </div>
         </form>
 
-        <footer id="gtco-footer" role="contentinfo">
-            <div class="row copyright">
-                <div class="col-md-12">
-                    <small class="block">&copy; 2016 nemo. All Rights Reserved.</small>
-                </div>
+        <div class="row copyright">
+            <div class="col-md-12">
+                <small class="block">&copy; 2016 nemo. All Rights Reserved.</small>
             </div>
-        </footer>
+        </div>
     </div>
 
     <div class="gototop js-top">
