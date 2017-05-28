@@ -63,3 +63,12 @@ public class Branch
     public string branch_name;
     public string description;
 }
+
+public class Comment
+{
+    public int comment_id;
+    public int user_id;
+    public int target_user_id;
+    public int warehouse_id;
+    public string content;
+}
