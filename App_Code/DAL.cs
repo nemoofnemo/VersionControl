@@ -520,3 +520,14 @@ public class BranchDAL
         return true;
     }
 }
+
+public class CommentDAL
+{
+    private SqlDatabase sqlServerDB;
+
+    public CommentDAL()
+    {
+        DatabaseProviderFactory factory = new DatabaseProviderFactory();
+        sqlServerDB = factory.CreateDefault() as SqlDatabase;
+    }
+}
