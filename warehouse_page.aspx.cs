@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Text;
 
 public partial class warehouse_page : System.Web.UI.Page
 {
@@ -80,11 +81,42 @@ public partial class warehouse_page : System.Web.UI.Page
 
         }
 
-        //init file explorer
+        //file
+        fileInit();
+    }
+
+    void fileInit()
+    {
         root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
-        if (FileSystem.IsFolder(root))
+
+        foreach (ListItem item in listBox.Items)
         {
-            string[] folderList = FileSystem.GetFolderList(root);
+            if (item.Selected)
+            {
+                if (FileSystem.IsFile(root + @"\" + pathLabel.Text + item.Text))
+                {
+                    byte[] data = FileSystem.ReadFile(root + @"\" + item.Text);
+                    file_content.InnerText = Encoding.Default.GetString(data);
+                    //pathLabel.Text += item.Text;
+                }
+                else if (FileSystem.IsFolder(root + @"\" + pathLabel.Text + item.Text))
+                {
+                    pathLabel.Text += item.Text;
+                    file_content.InnerHtml = "";
+                }
+                else
+                {
+                    file_content.InnerHtml = "Invalid Data.";
+                    pathLabel.Text = "";
+                }
+                break;
+            }
+        }
+        listBox.Items.Clear();
+
+        if (FileSystem.IsFolder(root + @"\" + pathLabel.Text))
+        {
+            string[] folderList = FileSystem.GetFolderList(root + @"\" + pathLabel.Text);
             if (folderList != null)
             {
                 foreach (string s in folderList)
@@ -92,8 +124,8 @@ public partial class warehouse_page : System.Web.UI.Page
                     listBox.Items.Add(s + @"\");
                 }
             }
-            string[] fileList = FileSystem.GetFileList(root);
-            if(fileList != null)
+            string[] fileList = FileSystem.GetFileList(root + @"\" + pathLabel.Text);
+            if (fileList != null)
             {
                 foreach (string s in fileList)
                 {
@@ -102,11 +134,9 @@ public partial class warehouse_page : System.Web.UI.Page
             }
             listBox.AutoPostBack = true;
         }
-        //listBox.Items.Clear();
-        //file_content.InnerText = "";
-
     }
 
+    //=============================graph========================================
     private struct Node
     {
         public int vid;
@@ -427,12 +457,52 @@ public partial class warehouse_page : System.Web.UI.Page
 
     protected void listBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        foreach(ListItem item in listBox.Items)
+        //foreach (ListItem item in listBox.Items)
+        //{
+        //    if (item.Selected)
+        //    {
+        //        //file_content.InnerHtml = item.Text;
+        //        root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
+        //        if (FileSystem.IsFile(root + @"\" + item.Text)) {
+        //            pathLabel.Text += item.Text;
+        //        }
+        //        else if (FileSystem.IsFolder(root + @"\" + item.Text))
+        //        {
+        //            pathLabel.Text += item.Text + @"\";
+        //        }
+        //        else
+        //        {
+        //            file_content.InnerHtml = "Invalid Data.";
+        //        }
+        //        break;
+        //    }
+        //}
+    }
+
+    protected void rootButton_Click(object sender, ImageClickEventArgs e)
+    {
+        pathLabel.Text = "";
+        file_content.InnerHtml = "";
+        root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
+        if (FileSystem.IsFolder(root + @"\" + pathLabel.Text))
         {
-            if (item.Selected)
+            string[] folderList = FileSystem.GetFolderList(root + @"\" + pathLabel.Text);
+            if (folderList != null)
             {
-                file_content.InnerHtml = item.Text;
+                foreach (string s in folderList)
+                {
+                    listBox.Items.Add(s + @"\");
+                }
             }
+            string[] fileList = FileSystem.GetFileList(root + @"\" + pathLabel.Text);
+            if (fileList != null)
+            {
+                foreach (string s in fileList)
+                {
+                    listBox.Items.Add(s);
+                }
+            }
+            listBox.AutoPostBack = true;
         }
     }
 }

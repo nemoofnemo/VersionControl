@@ -530,4 +530,12 @@ public class CommentDAL
         DatabaseProviderFactory factory = new DatabaseProviderFactory();
         sqlServerDB = factory.CreateDefault() as SqlDatabase;
     }
+
+    bool Insert(ref Comment c)
+    {
+
+        return true;
+    }
+
+    
 }
