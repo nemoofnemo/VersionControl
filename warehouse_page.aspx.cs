@@ -484,6 +484,7 @@ public partial class warehouse_page : System.Web.UI.Page
         pathLabel.Text = "";
         file_content.InnerHtml = "";
         root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
+        listBox.Items.Clear();
         if (FileSystem.IsFolder(root + @"\" + pathLabel.Text))
         {
             string[] folderList = FileSystem.GetFolderList(root + @"\" + pathLabel.Text);
@@ -504,5 +505,15 @@ public partial class warehouse_page : System.Web.UI.Page
             }
             listBox.AutoPostBack = true;
         }
+    }
+
+    protected void createFileButton_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("");
+    }
+
+    protected void createFolderButton_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("");
     }
 }

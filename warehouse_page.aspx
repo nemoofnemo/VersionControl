@@ -293,8 +293,8 @@
                 <asp:ImageButton ID="backwardButton" runat="server" ImageUrl="~/images/backward.png" Height="32px" Width="32px" />
                 <%--<asp:ImageButton ID="forwardButton" runat="server" ImageUrl="~/images/forward.png" Height="32px" Width="32px" />--%>
                 <asp:ImageButton ID="rootButton" runat="server" ImageUrl="~/images/root.png" Height="32px" Width="32px" OnClick="rootButton_Click" />
-                <asp:ImageButton ID="createFileButton" runat="server" ImageUrl="~/images/file.png" Height="32px" Width="32px" />
-                <asp:ImageButton ID="createFolderButton" runat="server" ImageUrl="~/images/folder.png" Height="32px" Width="32px" />
+                <asp:ImageButton ID="createFileButton" runat="server" ImageUrl="~/images/file.png" Height="32px" Width="32px" OnClick="createFileButton_Click" />
+                <asp:ImageButton ID="createFolderButton" runat="server" ImageUrl="~/images/folder.png" Height="32px" Width="32px" OnClick="createFolderButton_Click" />
                 &nbsp;
                 <asp:Label ID="Label1" runat="server" Text="  Path:\" Font-Size="34px"></asp:Label>
                 <asp:Label ID="pathLabel" runat="server" Text="" Font-Size="34px"></asp:Label>
