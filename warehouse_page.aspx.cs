@@ -43,11 +43,11 @@ public partial class warehouse_page : System.Web.UI.Page
         //debug!!!!!!!!!!!!!!!!!!!!!!!
         wid = 1;
         vid = 1;
-        User u = new User();
-        u.user_id = 1;
-        UserDAL ud = new UserDAL();
-        ud.SelectByID(ref u);
-        Session["user"] = u;
+        //User u = new User();
+        //u.user_id = 1;
+        //UserDAL ud = new UserDAL();
+        //ud.SelectByID(ref u);
+        //Session["user"] = u;
 
         w = new Warehouse();
         w.warehouse_id = wid;
@@ -514,13 +514,22 @@ public partial class warehouse_page : System.Web.UI.Page
 
     protected void createFileButton_Click(object sender, ImageClickEventArgs e)
     {
-        if(checkUser())
-            Response.Redirect("UploadFile.aspx?wid=" + wid.ToString() +"&vid=" + vid.ToString() + "&path=" + pathLabel.Text);
+        if (checkUser())
+        {
+            Response.Redirect("UploadFile.aspx?wid=" + wid.ToString() + "&vid=" + vid.ToString() + "&path=" + pathLabel.Text);
+            pathLabel .Text= "";
+            listBox.Items.Clear();
+        }
+
     }
 
     protected void createFolderButton_Click(object sender, ImageClickEventArgs e)
     {
         if (checkUser())
+        {
             Response.Redirect("CreateFolder.aspx?wid=" + wid.ToString() + "&vid=" + vid.ToString() + "&path=" + pathLabel.Text);
+            pathLabel.Text = "";
+            listBox.Items.Clear();
+        }
     }
 }

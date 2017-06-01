@@ -70,16 +70,24 @@ public partial class CreateFolder : System.Web.UI.Page
         }
         else
         {
-            if (checkUser() && file1.PostedFile.ContentLength > 0)
+            if (checkUser())
             {
-                string root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid + @"\";
-                file1.PostedFile.SaveAs(root + @"\" + path + System.IO.Path.GetFileName(file1.PostedFile.FileName));
-                Response.Redirect("warehouse_page.aspx?vid=" + vid.ToString() + "&wid=" + wid.ToString());
+                if (file1.PostedFile.ContentLength > 0)
+                {
+                    string root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid + @"\";
+                    file1.PostedFile.SaveAs(root + @"\" + path + System.IO.Path.GetFileName(file1.PostedFile.FileName));
+                    Response.Redirect("warehouse_page.aspx?vid=" + vid.ToString() + "&wid=" + wid.ToString());
+                }
+                else
+                {
+                    Response.Write("<script>alert('invalid argument 5.')</script>");
+                }
             }
             else
             {
-                Response.Write("<script>alert('invalid argument 5.')</script>");
+                Response.Write("<script>alert('invalid argument 6.')</script>");
             }
+            
         }
         
     }

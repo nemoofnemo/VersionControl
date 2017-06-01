@@ -47,10 +47,12 @@ public class UserDAL
             u.register_time = reader.GetString(4);
             u.user_description = reader.GetString(5);
             u.user_type = reader.GetInt32(6);
+            reader.Close();
             return true;
         }
         else
         {
+            reader.Close();
             return false;
         }
     }
@@ -71,10 +73,12 @@ public class UserDAL
             u.register_time = reader.GetString(4);
             u.user_description = reader.GetString(5);
             u.user_type = reader.GetInt32(6);
+            reader.Close();
             return true;
         }
         else
         {
+            reader.Close();
             return false;
         }
     }
@@ -90,6 +94,7 @@ public class UserDAL
         reader = sqlServerDB.ExecuteReader(cmd);
         if (reader.Read())
         {
+            reader.Close();
             return false;
         }
 
@@ -98,6 +103,7 @@ public class UserDAL
         {
             if(reader[0] is System.DBNull)
             {
+                reader.Close();
                 return false;
             }
             else
@@ -107,8 +113,10 @@ public class UserDAL
         }
         else
         {
+            reader.Close();
             return false;
         }
+        reader.Close();
 
         //todo:data check
 
@@ -157,10 +165,12 @@ public class WarehouseDAL
             w.warehouse_description = reader.GetString(5);
             w.master_version_id = reader.GetInt32(6);
             w.warehouse_name = reader.GetString(7);
+            reader.Close();
             return true;
         }
         else
         {
+            reader.Close();
             return false;
         }
     }
@@ -178,6 +188,7 @@ public class WarehouseDAL
         {
             if (reader[0] is System.DBNull)
             {
+                reader.Close();
                 return false;
             }
             else
@@ -187,8 +198,10 @@ public class WarehouseDAL
         }
         else
         {
+            reader.Close();
             return false;
         }
+        reader.Close();
 
         //insert
         cmd = sqlServerDB.GetSqlStringCommand("insert into warehouse_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
@@ -267,6 +280,7 @@ public class WarehouseDAL
             l.Add(w);
         }
 
+        reader.Close();
         return true;
     }
     
@@ -293,6 +307,7 @@ public class VersionDAL
         {
             if (reader[0] is System.DBNull)
             {
+                reader.Close();
                 return false;
             }
             else
@@ -302,8 +317,10 @@ public class VersionDAL
         }
         else
         {
+            reader.Close();
             return false;
         }
+        reader.Close();
 
         //insert
         cmd = sqlServerDB.GetSqlStringCommand("insert into version_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7,@a8)");
@@ -365,10 +382,12 @@ public class VersionDAL
             v.version_name = reader.GetString(6);
             v.description = reader.GetString(7);
             v.branch_id = reader.GetInt32(8);
+            reader.Close();
             return true;
         }
         else
         {
+            reader.Close();
             return false;
         }
     }
@@ -407,6 +426,7 @@ public class BranchDAL
         {
             if (reader[0] is System.DBNull)
             {
+                reader.Close();
                 return false;
             }
             else
@@ -416,8 +436,10 @@ public class BranchDAL
         }
         else
         {
+            reader.Close();
             return false;
         }
+        reader.Close();
 
         //insert
         cmd = sqlServerDB.GetSqlStringCommand("insert into branch_table values(@a0,@a1,@a2,@a3,@a4,@a5,@a6,@a7)");
@@ -473,10 +495,12 @@ public class BranchDAL
             b.timestamp = reader.GetString(5);
             b.branch_name = reader.GetString(6);
             b.description = reader.GetString(7);
+            reader.Close();
             return true;
         }
         else
         {
+            reader.Close();
             return false;
         }
     }
@@ -505,6 +529,7 @@ public class BranchDAL
             l.Add(b);
         }
 
+        reader.Close();
         return true;
     }
 
