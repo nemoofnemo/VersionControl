@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UploadFile.aspx.cs" Inherits="UploadFile" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UploadFile.aspx.cs" Inherits="CreateFolder" %>
 
 <!DOCTYPE html>
 
@@ -10,7 +10,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+        <a>文件：</a>
+        <input type="file" id="file1" runat="server" />
+        <br />
+        <asp:Button ID="Button1" runat="server" Text="上传" OnClick="Button1_Click" />
     </div>
     </form>
 </body>
