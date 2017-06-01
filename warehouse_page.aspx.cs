@@ -43,11 +43,11 @@ public partial class warehouse_page : System.Web.UI.Page
         //debug!!!!!!!!!!!!!!!!!!!!!!!
         wid = 1;
         vid = 1;
-        //User u = new User();
-        //u.user_id = 1;
-        //UserDAL ud = new UserDAL();
-        //ud.SelectByID(ref u);
-        //Session["user"] = u;
+        User u = new User();
+        u.user_id = 1;
+        UserDAL ud = new UserDAL();
+        ud.SelectByID(ref u);
+        Session["user"] = u;
 
         w = new Warehouse();
         w.warehouse_id = wid;
