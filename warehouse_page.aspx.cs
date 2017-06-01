@@ -82,8 +82,6 @@ public partial class warehouse_page : System.Web.UI.Page
 
         //init file explorer
         root = Server.MapPath("~/") + @"data\" + wid + @"\" + vid;
-        listBox.Items.Clear();
-        //file_content.InnerText = "";
         if (FileSystem.IsFolder(root))
         {
             string[] folderList = FileSystem.GetFolderList(root);
@@ -104,6 +102,9 @@ public partial class warehouse_page : System.Web.UI.Page
             }
             listBox.AutoPostBack = true;
         }
+        //listBox.Items.Clear();
+        //file_content.InnerText = "";
+
     }
 
     private struct Node
@@ -430,7 +431,7 @@ public partial class warehouse_page : System.Web.UI.Page
         {
             if (item.Selected)
             {
-                file_content.InnerText = item.Text;
+                file_content.InnerHtml = item.Text;
             }
         }
     }
