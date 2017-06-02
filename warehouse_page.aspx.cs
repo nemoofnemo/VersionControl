@@ -532,4 +532,9 @@ public partial class warehouse_page : System.Web.UI.Page
             listBox.Items.Clear();
         }
     }
+
+    protected void backwardButton_Click(object sender, ImageClickEventArgs e)
+    {
+        rootButton_Click(sender, e);
+    }
 }
