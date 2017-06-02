@@ -12,12 +12,6 @@
     <meta property="og:url" content="" />
     <meta property="og:site_name" content="" />
     <meta property="og:description" content="" />
-    <meta name="twitter:title" content="" />
-    <meta name="twitter:image" content="" />
-    <meta name="twitter:url" content="" />
-    <meta name="twitter:card" content="" />
-
-    <!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
 
     <!-- Animate.css -->
     <link rel="stylesheet" href="css/animate.css">
@@ -70,7 +64,7 @@
                         <div class="display-t">
                             <div class="display-tc">
                                 <h1 class="animate-box" data-animate-effect="fadeInUp">基于ASP.NET的源代码版本控制系统</h1>
-                                <h2 class="animate-box" data-animate-effect="fadeInUp">Free HTML5 Bootstrap Templates</h2>
+                                <h2 class="animate-box" data-animate-effect="fadeInUp">版本管理是软件配置管理的基础，它管理并保护开发者的软件资源。</h2>
                                 <form id="form1" runat="server">
                                     <p class="animate-box" data-animate-effect="fadeInUp">
                                         <a href="login.aspx" class="btn btn-white btn-lg btn-outline">登录</a>

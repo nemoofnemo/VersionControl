@@ -49,7 +49,7 @@
 		<div class="gtco-container">
 			<div class="row animate-box">
 				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
-					<h2>Register</h2>
+					<h2>注册</h2>
 					<p>Be the first to know about the new update.</p>
 				</div>
 			</div>
@@ -60,14 +60,14 @@
                         <form id="form1" runat="server" method="get">
                             <label for="name" class="sr-only">Name</label>
                             <p>
-                                <input type="text" runat="server" class="form-control" id="useraccount" placeholder="Account"></p>
+                                <input type="text" runat="server" class="form-control" id="useraccount" placeholder="账号"></p>
                             <p>
-                                <input type="text" runat="server" class="form-control" id="username" placeholder="Username"></p>
+                                <input type="text" runat="server" class="form-control" id="username" placeholder="用户名"></p>
                             <p>
-                                <input type="password" runat="server" class="form-control" id="password" placeholder="Password"></p>
+                                <input type="password" runat="server" class="form-control" id="password" placeholder="密码"></p>
                             <p>
-                                <input type="text" runat="server" class="form-control" id="description" placeholder="Description"></p>
-                            <asp:Button ID="regButton" runat="server" Class="btn btn-default btn-block" Style="color: white" OnClick="regButton_Click" Text="Register" />
+                                <input type="text" runat="server" class="form-control" id="description" placeholder="用户描述"></p>
+                            <asp:Button ID="regButton" runat="server" Class="btn btn-default btn-block" Style="color: white" OnClick="regButton_Click" Text="提交" />
                         </form>
                     </div>
 
@@ -76,54 +76,9 @@
 		</div>
 	</div>
 
-	<footer id="gtco-footer" role="contentinfo">
-		<div class="gtco-container">
-			<div class="row row-p	b-md">
-
-				<div class="col-md-4">
-					<div class="gtco-widget">
-						<h3>About Us</h3>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore eos molestias quod sint ipsum possimus temporibus officia iste perspiciatis consectetur in fugiat repudiandae cum. Totam cupiditate nostrum ut neque ab?</p>
-					</div>
-				</div>
-
-				<div class="col-md-4 col-md-push-1">
-					<div class="gtco-widget">
-						<h3>Links</h3>
-						<ul class="gtco-footer-links">
-							<li><a href="#">Knowledge Base</a></li>
-							<li><a href="#">Career</a></li>
-							<li><a href="#">Press</a></li>
-							<li><a href="#">Terms of services</a></li>
-							<li><a href="#">Privacy Policy</a></li>
-						</ul>
-					</div>
-				</div>
-
-				<div class="col-md-4">
-					<div class="gtco-widget">
-						<h3>Get In Touch</h3>
-						<ul class="gtco-quick-contact">
-							<li><a href="#"><i class="icon-phone"></i> +1 234 567 890</a></li>
-							<li><a href="#"><i class="icon-mail2"></i> info@gettemplates.co</a></li>
-							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
-						</ul>
-					</div>
-				</div>
-
-			</div>
-
-			<div class="row copyright">
-				<div class="col-md-12">
-					<p class="pull-left">
-						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small> 
-						<small class="block">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> Demo Images: <a href="#" target="_blank">Unsplash</a></small>
-					</p>
-				</div>
-			</div>
-
-		</div>
-	</footer>
+        <p class="pull-left">
+            <small class="block">&copy; 2016 Nemo. All Rights Reserved.</small>
+        </p>
 
 	<div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
