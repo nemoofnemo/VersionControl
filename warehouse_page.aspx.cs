@@ -41,13 +41,13 @@ public partial class warehouse_page : System.Web.UI.Page
         }
 
         //debug!!!!!!!!!!!!!!!!!!!!!!!
-        wid = 1;
-        vid = 1;
-        User u = new User();
-        u.user_id = 1;
-        UserDAL ud = new UserDAL();
-        ud.SelectByID(ref u);
-        Session["user"] = u;
+        //wid = 1;
+        //vid = 1;
+        //User u = new User();
+        //u.user_id = 1;
+        //UserDAL ud = new UserDAL();
+        //ud.SelectByID(ref u);
+        //Session["user"] = u;
 
         w = new Warehouse();
         w.warehouse_id = wid;
@@ -200,8 +200,7 @@ public partial class warehouse_page : System.Web.UI.Page
         {
             if(!vd.SelectByID(ref v))
             {
-                //error
-                return false;
+                break;
             }
             Node n = new Node();
             n.vid = v.version_id;
@@ -245,7 +244,7 @@ public partial class warehouse_page : System.Web.UI.Page
             {
                 if (!vd.SelectByID(ref v))
                 {
-                    return false;
+                    break;
                 }
                 if (isFirst)
                 {
@@ -363,6 +362,12 @@ public partial class warehouse_page : System.Web.UI.Page
 
             v2.version_id = v2.next_id;
         }
+
+        v2.version_id = id;
+        vd.SelectByID(ref v2);
+        v2.next_id = 0;
+        vd.Update(ref v2);
+
         return true;
     }
     
@@ -435,6 +440,10 @@ public partial class warehouse_page : System.Web.UI.Page
 
             v2.version_id = v2.next_id;
         }
+        v2.version_id = int.Parse(hidValue.Value);//warnning
+        vd.SelectByID(ref v2);
+        v2.next_id = 0;
+        vd.Update(ref v2);
     }
 
     protected void deleteBranch_Click(object sender, EventArgs e)

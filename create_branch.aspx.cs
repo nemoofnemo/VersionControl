@@ -128,5 +128,6 @@ public partial class create_branch : System.Web.UI.Page
         }
 
         Response.Write("<script>alert('create success.');</script>");
+        Response.Redirect("warehouse_page.aspx?vid=" + v.version_id.ToString() + "&wid=" + v.warehouse_id.ToString());
     }
 }
