@@ -410,18 +410,18 @@ public partial class warehouse_page : System.Web.UI.Page
         {
             deleteFrom(v2.version_id);
         }
-        Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid="+w2.warehouse_id.ToString()+"?vid="+w2.master_version_id.ToString()+"';</script>");
+        Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid="+w2.warehouse_id.ToString()+"&vid="+w2.master_version_id.ToString()+"';</script>");
     }
 
     void deleteBranchEx() {
         Version v2 = new Version();
-        v2.version_id = int.Parse(hidValue.Value);//warnning
+        v2.version_id = b.start_id;
         if (!vd.SelectByID(ref v2))
         {
             Response.Write("<script>alert('invalid argument.')</script>");
             return;
         }
-        bd.Delete(v2.branch_id);
+        
         while (true)
         {
             if (v2.version_id == 0)
@@ -430,7 +430,7 @@ public partial class warehouse_page : System.Web.UI.Page
             }
             if (!vd.SelectByID(ref v2))
             {
-                return ;
+                break;//warnning
             }
 
             //warnning
@@ -440,10 +440,8 @@ public partial class warehouse_page : System.Web.UI.Page
 
             v2.version_id = v2.next_id;
         }
-        v2.version_id = int.Parse(hidValue.Value);//warnning
-        vd.SelectByID(ref v2);
-        v2.next_id = 0;
-        vd.Update(ref v2);
+
+        bd.Delete(v2.branch_id);
     }
 
     protected void deleteBranch_Click(object sender, EventArgs e)
@@ -466,7 +464,7 @@ public partial class warehouse_page : System.Web.UI.Page
         Warehouse w2 = new Warehouse();
         w2.warehouse_id = w.warehouse_id;
         wd.SelectedByID(ref w2);
-        Response.Write("<script>alert('success.');window.location.href='warehouse_page.aspx?wid=" + w2.warehouse_id.ToString() + "?vid=" + w2.master_version_id.ToString() + "';</script>");
+        Response.Write("<script>window.location.href='warehouse_page.aspx?wid=" + w2.warehouse_id.ToString() + "&vid=" + w2.master_version_id.ToString() + "';</script>");
     }
 
     protected void listBox_SelectedIndexChanged(object sender, EventArgs e)
