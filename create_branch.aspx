@@ -6,21 +6,14 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Create!</title>
+	<title>创建分支</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  	<!-- Facebook and Twitter integration -->
 	<meta property="og:title" content=""/>
 	<meta property="og:image" content=""/>
 	<meta property="og:url" content=""/>
 	<meta property="og:site_name" content=""/>
 	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
-
-	<!-- <link href="https://fonts.googleapis.com/css?family=Droid+Sans" rel="stylesheet"> -->
 	
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
@@ -66,8 +59,8 @@
                     <div style="width: 50%; margin-left: auto; margin-right: auto;">
                         <form id="form1" runat="server">
                             <label for="name" class="sr-only">Name</label>
-                            <p><input type="text" runat="server" class="form-control" id="name" placeholder="name"></p>
-                            <p><input type="text" runat="server" class="form-control" id="desc" placeholder="desc"></p>
+                            <p><input type="text" runat="server" class="form-control" id="name" placeholder="分支名称"></p>
+                            <p><input type="text" runat="server" class="form-control" id="desc" placeholder="分支描述"></p>
                             <asp:Button ID="createButton" runat="server" Class="btn btn-default btn-block" Style="color: white" Text="create" OnClick="createButton_Click" />
                         </form>
                     </div>
@@ -92,7 +85,6 @@
 				<div class="col-md-12">
 					<p class="pull-left">
 						<small class="block">&copy; 2016 Nemo. All Rights Reserved.</small> 
-						<small class="block">More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a> Demo Images: <a href="#" target="_blank">Unsplash</a></small>
 					</p>
 				</div>
 			</div>
