@@ -101,7 +101,8 @@ public partial class warehouse_page : System.Web.UI.Page
                 if (FileSystem.IsFile(root + @"\" + pathLabel.Text + item.Text))
                 {
                     byte[] data = FileSystem.ReadFile(root + @"\" + item.Text);
-                    file_content.InnerText = Encoding.Default.GetString(data);
+                    string temp_str = Encoding.Default.GetString(data);  //show file content
+                    file_content.InnerHtml = "<textarea style=\"width:100%;height:400px\">" +temp_str + "</textarea>";
                     //pathLabel.Text += item.Text;
                 }
                 else if (FileSystem.IsFolder(root + @"\" + pathLabel.Text + item.Text))

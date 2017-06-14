@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Web;
 
 /// <summary>
@@ -41,9 +42,6 @@ public class FileSystem
         {
             return false;
         }
-
-
-        return true;
     }
 
     public static bool CreateFolder(string path)
@@ -162,20 +160,42 @@ public class FileSystem
         }
     }
 
+    private static byte[] ReadFileRPC(string path)
+    {
+        TcpClient tcp = new TcpClient();
+        tcp.Connect("127.0.0.1", 6001);
+        NetworkStream streamToServer = tcp.GetStream();
+        byte[] data = new byte[2097152];
+        int cnt = streamToServer.Read(data, 0, data.Length);
+        tcp.Close();
+        if (cnt == 0)
+            return null;
+        else
+            return data;
+    }
+
     public static byte[] ReadFile(string path)
     {
         try
         {
-            FileInfo fi = new FileInfo(path);
-            byte[] ret = new byte[fi.Length];
-            FileStream fs = fi.OpenRead();
-            //warning: long to int convertion
-            fs.Read(ret, 0, (int)fi.Length);
-            return ret;
+            return ReadFileRPC(path);
         }
         catch (Exception e)
         {
-            return null;
+            try
+            {
+                FileInfo fi = new FileInfo(path);
+                byte[] ret = new byte[fi.Length];
+                FileStream fs = fi.OpenRead();
+                //warning: long to int convertion
+                fs.Read(ret, 0, (int)fi.Length);
+                fs.Close();
+                return ret;
+            }
+            catch (Exception e2)
+            {
+                return null;
+            }
         }
     }
 
