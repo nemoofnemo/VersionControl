@@ -162,10 +162,11 @@ public class FileSystem
 
     private static byte[] ReadFileRPC(string path)
     {
-        TcpClient tcp = new TcpClient();
-        tcp.Connect("127.0.0.1", 6001);
+        TcpClient tcp = new TcpClient("127.0.0.1", 6001);
         NetworkStream streamToServer = tcp.GetStream();
         byte[] data = new byte[2097152];
+        byte[] req = System.Text.Encoding.ASCII.GetBytes(path);
+        streamToServer.Write(req, 0, req.Length);
         int cnt = streamToServer.Read(data, 0, data.Length);
         tcp.Close();
         if (cnt == 0)
