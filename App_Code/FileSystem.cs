@@ -164,16 +164,26 @@ public class FileSystem
     {
         TcpClient tcp = new TcpClient("127.0.0.1", 6001);
         NetworkStream streamToServer = tcp.GetStream();
-        byte[] data = new byte[2097152];
-        
+        byte[] data = null;
+
         byte[] req = System.Text.Encoding.ASCII.GetBytes(path);
         streamToServer.Write(req, 0, req.Length);
 
         int index = 0;
         int cnt = 0;
         byte[] buf = new byte[8192];
-        while((cnt = streamToServer.Read(buf, 0, buf.Length)) != 0)
+        while ((cnt = streamToServer.Read(buf, 0, buf.Length)) != 0)
         {
+            if (data == null)
+            {
+                data = new byte[cnt];
+            }
+            else
+            {
+                byte[] tmpArr = new byte[data.Length + cnt];
+                data.CopyTo(tmpArr, 0);
+                data = tmpArr;
+            }
             buf.CopyTo(data, index);
             index += cnt;
         }
