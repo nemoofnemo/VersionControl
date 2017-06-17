@@ -101,7 +101,23 @@ public partial class warehouse_page : System.Web.UI.Page
                 if (FileSystem.IsFile(root + @"\" + pathLabel.Text + item.Text))
                 {
                     byte[] data = FileSystem.ReadFile(root + @"\" + item.Text);
-                    string temp_str = Encoding.Default.GetString(data);  //show file content
+                    string temp_str;  //show file content
+                    if (data == null)
+                    {
+                        temp_str = "empty file.";
+                    }
+                    else if (data.Length == 0)
+                    {
+                        temp_str = "empty file.";
+                    }
+                    else if (data.Length > 0)
+                    {
+                        temp_str = Encoding.Default.GetString(data);
+                    }
+                    else
+                    {
+                        temp_str = "unknown eror.";
+                    }                    
                     file_content.InnerHtml = "<textarea style=\"width:100%;height:400px\">" +temp_str + "</textarea>";
                     //pathLabel.Text += item.Text;
                 }
