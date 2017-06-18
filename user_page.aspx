@@ -78,7 +78,7 @@
                     <div class="col-md-8 col-md-offset-2 text-center gtco-heading">
                         <h2>代码仓库列表</h2>
                         <div style="width: 60%; margin-left: auto; margin-right: auto;">
-                            <input id="createButton" type="button" class="btn btn-default btn-block" value="Create a warehouse!" onclick="window.location.href = 'create_page.aspx'" />
+                            <input id="createButton" type="button" class="btn btn-default btn-block" value="创建代码仓库!" onclick="window.location.href = 'create_page.aspx'" />
                         </div>
                     </div>
                 </div>
