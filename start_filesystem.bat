@@ -2,6 +2,7 @@
 
 echo start master server
 start "Cluster Master Server" "D:\Documents\visual studio 2015\Projects\Cluster\Debug\Cluster.exe"
+echo success
 
 pause
 
